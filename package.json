@@ -27,6 +27,7 @@
 		"globals": "^16.0.0",
 		"mdsvex": "^0.12.3",
 		"prettier": "^3.4.2",
+		"prettier-plugin-organize-imports": "^4.1.0",
 		"prettier-plugin-svelte": "^3.3.3",
 		"prettier-plugin-tailwindcss": "^0.6.11",
 		"svelte": "^5.0.0",
@@ -40,5 +41,9 @@
 		"onlyBuiltDependencies": [
 			"esbuild"
 		]
+	},
+	"dependencies": {
+		"@lucide/svelte": "^0.510.0",
+		"shiki": "^3.4.1"
 	}
 }

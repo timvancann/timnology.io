@@ -1,2 +1,61 @@
 @import 'tailwindcss';
 @plugin '@tailwindcss/typography';
+
+@layer base {
+  .float {
+    animation: float 4s ease-in-out infinite;
+  }
+  /* Common gradient text effect */
+  .gradient-text {
+    @apply bg-gradient-to-r bg-clip-text text-transparent;
+  }
+
+  /* Custom scrollbar for supported browsers */
+  ::-webkit-scrollbar {
+    width: 8px;
+    height: 8px;
+  }
+
+  ::-webkit-scrollbar-track {
+    @apply bg-slate-100 dark:bg-slate-800;
+  }
+
+  ::-webkit-scrollbar-thumb {
+    @apply rounded-full bg-slate-300 transition-colors hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500;
+  }
+}
+
+.prose {
+	p {
+		:not(:is(h2, h3, h4, h5, h6) + p) {
+			margin-top: var(--size-7);
+		}
+
+		/* ignore paragraph tag around images */
+		&:has(img) {
+			display: contents;
+		}
+	}
+
+	:is(h2, h3, h4, h5, h6) {
+		margin-top: var(--size-8);
+		margin-bottom: var(--size-3);
+	}
+
+	:is(ul, ol) {
+		list-style-type: '🔥';
+		padding-left: var(--size-5);
+	}
+
+	:is(ul, ol) li {
+		margin-block: var(--size-2);
+		padding-inline-start: var(--size-2);
+	}
+
+	pre {
+		max-inline-size: 100%;
+		padding: 10px;
+		border-radius: 8px;
+		tab-size: 2;
+	}
+}
