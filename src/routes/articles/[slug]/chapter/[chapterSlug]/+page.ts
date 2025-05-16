@@ -11,7 +11,6 @@ export async function load({ params, fetch }) {
     const paths = import.meta.glob('/src/articles/**/*.md', { eager: true });
     let chapterPath = '';
     for (const path in paths) {
-      console.log(path, slug, chapterSlug);
       if (path.includes(slug) && path.includes(chapterSlug + '.md')) {
         const fileName = path.split('/').pop();
         chapterPath = `../../../../../articles/${slug}/${fileName}`;
