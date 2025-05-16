@@ -13,7 +13,8 @@ export async function load({ params, fetch }) {
     for (const path in paths) {
       console.log(path, slug, chapterSlug);
       if (path.includes(slug) && path.includes(chapterSlug + '.md')) {
-        chapterPath = path;
+        const fileName = path.split('/').pop();
+        chapterPath = `../../../../../articles/${slug}/${fileName}`;
         break;
       }
     }

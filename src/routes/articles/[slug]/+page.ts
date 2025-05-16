@@ -3,7 +3,7 @@ import { error } from '@sveltejs/kit';
 export async function load({ params, fetch }) {
   try {
     // Load the article content
-    const article = await import(`../../../articles/${params.slug}/index.md`);
+    const article = await import(`/src/articles/${params.slug}/index.md`);
 
     // Fetch chapters for this article
     let chapters = [];
