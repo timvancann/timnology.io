@@ -2,33 +2,26 @@
   import { formatDate } from '$lib/utils';
   import { fade, fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
-  import { Calendar, Github, Youtube, ArrowRight, Bookmark, Clock, List, BookOpen } from '@lucide/svelte';
-  import type { Chapter } from '$lib/types';
-  import YoutubeEmbed from 'svelte-youtube-embed';
+  import { Calendar, Github, Youtube, ArrowRight, Bookmark, Clock, List } from '@lucide/svelte';
+  import ChapterList from '$lib/components/ChapterList.svelte';
 
-  interface Props {
-    data: {
-      meta: any;
-      isIndexPage: boolean;
-      chapters: Chapter[];
-      currentChapter: Chapter | null;
-    };
-  }
-
-  let { data }: Props = $props();
-  let { meta, chapters, isIndexPage } = data;
+  let { data } = $props();
+  let meta = $derived(data.meta);
+  let chapters = $derived(data.chapters);
+  let currentChapter = $derived(data.currentChapter);
 </script>
 
+<!-- Using the same template as the article page with a different page title -->
 <svelte:head>
-  <title>{meta.title} | Timnology</title>
+  <title>{currentChapter.title} - {meta.title} | Timnology</title>
   <meta property="og:type" content="article" />
-  <meta property="og:title" content={meta.title} />
-  <meta property="og:description" content={meta.description} />
-  <meta name="description" content={meta.description} />
+  <meta property="og:title" content={`${currentChapter.title} - ${meta.title}`} />
+  <meta property="og:description" content={currentChapter.description || meta.description} />
+  <meta name="description" content={currentChapter.description || meta.description} />
 </svelte:head>
 
 <!-- Article Hero Section -->
-<section class="pt-8 pb-4 relative bg-gradient-to-b from-[#0a0118] to-[#0c1a28] overflow-hidden">
+<section class="pt-8 relative bg-gradient-to-b from-[#0a0118] to-[#0c1a28] overflow-hidden">
   <!-- Background elements -->
   <div class="absolute inset-0 z-0">
     <!-- Hex grid pattern -->
@@ -44,7 +37,7 @@
 
   <div class="container mx-auto px-4 relative z-10">
     <!-- Breadcrumb navigation -->
-    <div class="mb-8" in:fade={{ duration: 600, delay: 100 }}>
+    <div class="mb-4" in:fade={{ duration: 600, delay: 100 }}>
       <div class="flex items-center text-sm">
         <a href="/" class="text-slate-400 hover:text-white transition-colors">Home</a>
         <span class="mx-2 text-slate-600">/</span>
@@ -52,46 +45,57 @@
           <a href={`/categories/${meta.categories[0]}`} class="text-slate-400 hover:text-white transition-colors">{meta.categories[0]}</a>
           <span class="mx-2 text-slate-600">/</span>
         {/if}
-        <span class="text-[#00BBBB]">{meta.title}</span>
+        <a href={`/articles/${meta.slug}`} class="text-slate-400 hover:text-white transition-colors">{meta.title}</a>
+        <span class="mx-2 text-slate-600">/</span>
+        <span class="text-[#00BBBB]">Chapter {currentChapter.index + 1}</span>
       </div>
     </div>
 
-    <!-- Title and metadata -->
+    <!-- Chapter title and metadata -->
     <div class="max-w-4xl">
       <h1 class="text-3xl md:text-5xl font-bold text-white mb-6" in:fly={{ y: 20, duration: 800, delay: 300, easing: quintOut }}>
-        {meta.title}
+        <span class="text-[#00BBBB]">Chapter {currentChapter.index + 1}:</span>
+        {currentChapter.title}
       </h1>
 
       <div class="flex flex-wrap gap-4 mb-4 text-sm" in:fade={{ duration: 800, delay: 500 }}>
         <!-- Date -->
-        {#if meta.date}
+        {#if currentChapter.date || meta.date}
           <div class="flex items-center text-amber-300">
             <Calendar size={16} class="mr-1.5" />
-            <span>{formatDate(meta.date)}</span>
+            <span>{formatDate(currentChapter.date || meta.date)}</span>
           </div>
         {/if}
 
-        <!-- Categories -->
-        {#if meta.categories && meta.categories.length > 0}
-          <div class="flex flex-wrap gap-2">
-            {#each meta.categories as category, i (i)}
-              <span class="rounded-full px-3 py-1 bg-[#00BBBB]/10 text-[#00BBBB] border border-[#00BBBB]/20">
-                #{category}
-              </span>
-            {/each}
-          </div>
-        {/if}
+        <!-- Progress indicator -->
+        <div class="flex items-center text-slate-300">
+          <span class="px-3 py-1 rounded-full bg-[#00BBBB]/10 text-[#00BBBB] border border-[#00BBBB]/20">
+            {currentChapter.index + 1} of {chapters.length}
+          </span>
+        </div>
       </div>
 
       <!-- Description -->
-      {#if meta.description}
+      {#if currentChapter.description}
         <p class="text-xl text-slate-300 mb-4 leading-relaxed" in:fly={{ y: 20, duration: 800, delay: 400, easing: quintOut }}>
-          {meta.description}
+          {currentChapter.description}
         </p>
       {/if}
 
       <!-- External resources links -->
       <div class="flex flex-wrap gap-4 my-4" in:fade={{ duration: 800, delay: 600 }}>
+        {#if currentChapter.youtube_url}
+          <a
+            href={`https://youtu.be/${meta.youtube_url}`}
+            target="_blank"
+            rel="noopener noreferrer"
+            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-red-500/80 text-white hover:bg-red-500 transition duration-300"
+          >
+            <Youtube size={18} />
+            <span>Watch Video Tutorial</span>
+          </a>
+        {/if}
+
         {#if meta.github}
           <a
             href={meta.github}
@@ -103,32 +107,13 @@
             <span>Source Code</span>
           </a>
         {/if}
-
-        {#if meta.youtube_url}
-          <a
-            href={`https://youtu.be/${meta.youtube_url}`}
-            target="_blank"
-            rel="noopener noreferrer"
-            class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0c1a28]/80 border border-white/10 text-white hover:bg-[#0c1a28] transition duration-300"
-          >
-            <Youtube size={18} class="text-red-400" />
-            <span>Watch Video</span>
-          </a>
-        {/if}
-
-        {#if isIndexPage && chapters.length > 0}
-          <a href={`/articles/${meta.slug}/chapter/${chapters[0].slug}`} class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition duration-300">
-            <BookOpen size={18} />
-            <span>Start Learning</span>
-          </a>
-        {/if}
       </div>
     </div>
   </div>
 </section>
 
 <!-- Main article content with chapters -->
-<section class="pt-8 pb-16 relative">
+<section class="py-16 bg-[#050a14] relative min-h-screen">
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row gap-8 relative">
       <!-- Sidebar with chapter navigation -->
@@ -136,10 +121,23 @@
         <div class="sticky top-24 bg-[#0c1a28]/80 backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden shadow-lg">
           <!-- Chapter list header -->
           <div class="p-4 border-b border-white/10 bg-gradient-to-r from-[#0c1a28] to-[#131836]">
-            <div class="flex items-center">
-              <List size={18} class="mr-2 text-[#00BBBB]" />
-              <h3 class="font-bold text-white">Chapters ({chapters.length})</h3>
+            <div class="flex items-center justify-between">
+              <div class="flex items-center">
+                <List size={18} class="mr-2 text-[#00BBBB]" />
+                <h3 class="font-bold text-white">Chapters</h3>
+              </div>
+              <span class="text-sm text-slate-400">{currentChapter.index + 1}/{chapters.length}</span>
             </div>
+          </div>
+
+          <!-- Progress indicator -->
+          <div class="relative h-1 bg-[#131836]">
+            <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-[#00BBBB] to-[#9333ea]" style={`width: ${((currentChapter.index + 1) / chapters.length) * 100}%`}></div>
+          </div>
+
+          <!-- Chapter list -->
+          <div class="p-4 max-h-[70vh] overflow-y-auto">
+            <ChapterList {chapters} articleSlug={meta.slug} activeChapter={currentChapter.slug} />
           </div>
 
           <!-- Additional resources -->
@@ -156,15 +154,15 @@
                     <span>GitHub Repository</span>
                   </a>
                 {/if}
-                {#if meta.youtube_url}
-                  <a href={`https://youtu.be/${meta.youtube_url}`} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
+                {#if currentChapter.youtube_url || meta.youtube_url}
+                  <a href={currentChapter.youtube_url || meta.youtube_url} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
                     <Youtube size={14} class="mr-2" />
                     <span>Video Tutorial</span>
                   </a>
                 {/if}
                 <div class="flex items-center text-slate-300">
                   <Clock size={14} class="mr-2" />
-                  <span>Est. time: {isIndexPage ? `${chapters.length * 10}-${chapters.length * 15} min` : '10-15 min'} </span>
+                  <span>Est. time: 10-15 min</span>
                 </div>
               </div>
             </div>
@@ -175,23 +173,38 @@
       <!-- Main content -->
       <div class="lg:w-3/4">
         <div class="bg-[#0c1a28]/80 backdrop-blur-sm rounded-lg border border-white/10 p-6 md:p-8 shadow-lg">
-          {#if meta.youtube_url}
-            <YoutubeEmbed id={meta.youtube_url} />
-          {/if}
           <!-- Article content -->
           <div class="prose prose-invert max-w-none">
             <data.content />
           </div>
 
           <!-- Chapter navigation buttons at bottom -->
-          {#if isIndexPage && chapters.length > 0}
-            <div class="flex justify-center mt-8 pt-8 border-t border-white/10">
-              <a href={`/articles/${meta.slug}/chapter/${chapters[0].slug}`} class="px-6 py-3 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition-colors flex items-center gap-2">
-                <span>Start Reading Chapter 1</span>
-                <ArrowRight size={18} />
+          <div class="flex justify-between mt-16 pt-8 border-t border-white/10">
+            {#if currentChapter.index > 0}
+              <a
+                href={`/articles/${meta.slug}/chapter/${chapters[currentChapter.index - 1].slug}`}
+                class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2"
+              >
+                <ArrowRight size={16} class="rotate-180" />
+                <span>Previous: {chapters[currentChapter.index - 1].title}</span>
               </a>
-            </div>
-          {/if}
+            {:else}
+              <a href={`/articles/${meta.slug}`} class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2">
+                <ArrowRight size={16} class="rotate-180" />
+                <span>Article Overview</span>
+              </a>
+            {/if}
+
+            {#if currentChapter.index < chapters.length - 1}
+              <a
+                href={`/articles/${meta.slug}/chapter/${chapters[currentChapter.index + 1].slug}`}
+                class="px-4 py-2 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition-colors flex items-center gap-2"
+              >
+                <span>Next: {chapters[currentChapter.index + 1].title}</span>
+                <ArrowRight size={16} />
+              </a>
+            {/if}
+          </div>
         </div>
       </div>
     </div>
@@ -199,7 +212,7 @@
 </section>
 
 <style>
-  /* Styling for prose content */
+  /* Styling for prose content - same as the article page */
   :global(.prose) {
     color: #d1d5db;
     font-size: 1.125rem;

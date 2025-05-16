@@ -1,32 +1,43 @@
-import type { Article } from '$lib/types';
+import type { Chapter } from '$lib/types';
 import { json } from '@sveltejs/kit';
 
-async function getPosts(article: string) {
-  let posts: Article[] = [];
+async function getChapters(articleSlug: string) {
+  let chapters: Chapter[] = [];
 
+  // Use glob to find all markdown files in the article directory except index.md
   const paths = import.meta.glob('/src/articles/**/*.md', { eager: true });
 
   for (const path in paths) {
-    if (path.split('/').at(-2) !== article) continue;
-    if (path.split('/').at(-1) === 'index.md') continue;
+    // Check if this file is in the correct article directory and is not index.md
+    const pathParts = path.split('/');
+    const fileName = pathParts[pathParts.length - 1];
+    const dirName = pathParts[pathParts.length - 2];
+
+    if (dirName !== articleSlug || fileName === 'index.md') continue;
 
     const file = paths[path];
-    const slug = path.split('/').at(-1)?.replace('.md', '');
+    const chapterSlug = fileName.split('_')[1].replace('.md', '');
 
-    if (file && typeof file === 'object' && 'metadata' in file && slug) {
-      const metadata = file.metadata as Omit<Article, 'slug'>;
-      const post = { ...metadata, slug } satisfies Article;
-      if (post.published) posts.push(post);
+    if (file && typeof file === 'object' && 'metadata' in file && chapterSlug) {
+      const metadata = file.metadata as Omit<Chapter, 'slug'>;
+      const chapter = {
+        ...metadata,
+        slug: chapterSlug,
+        order: metadata.order || 0
+      } as Chapter;
+
+      chapters.push(chapter);
     }
   }
 
-  posts = posts.sort((first, second) => new Date(second.date).getTime() - new Date(first.date).getTime());
+  // Sort chapters by order
+  chapters = chapters.sort((a, b) => a.order - b.order);
 
-  return posts;
+  return chapters;
 }
 
 export async function GET({ url }) {
-  const article: string = url.pathname.split('/').at(-2);
-  const posts = await getPosts(article);
-  return json(posts);
+  const articleSlug: string = url.pathname.split('/').at(-2);
+  const chapters = await getChapters(articleSlug);
+  return json(chapters);
 }

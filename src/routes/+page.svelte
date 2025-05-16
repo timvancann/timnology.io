@@ -23,6 +23,7 @@
     if (data.articles.length > 0) {
       featuredArticle = data.articles[Math.floor(Math.random() * data.articles.length)];
     }
+    featuredArticle = null;
   });
 </script>
 
@@ -43,6 +44,6 @@
 <TutorialsSection categorisedArticles={data.categorisedArticles} />
 
 <!-- Newsletter signup -->
-<Newsletter />
+<!--- <Newsletter /> -->
 <!-- Features section -->
 <Features />

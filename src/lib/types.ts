@@ -1,6 +1,6 @@
 export type Categories = 'sveltekit' | 'svelte';
 
-export type Article = {
+export interface Article {
   title: string;
   description: string;
   slug: string;
@@ -10,9 +10,10 @@ export type Article = {
   date: string;
   categories: Categories[];
   published: boolean;
-};
+}
 
-export type Post = {
+export interface Chapter {
   title: string;
   slug: string;
-};
+  order: number;
+}

@@ -46,7 +46,7 @@
           </div>
 
           <!-- Article cards grid -->
-          <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
+          <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {#each articles as article (article.slug)}
               <a href={`/articles/${article.slug}`} class="block no-underline">
                 <!-- Card with hover effects using classes -->
@@ -71,10 +71,10 @@
                       </div>
 
                       <!-- Date with fixed-width font -->
-                      {#if article.updatedAt}
+                      {#if article.date}
                         <div class="flex items-center text-xs text-[rgba(251,191,36,0.8)] font-mono">
                           <Calendar size={12} class="mr-1" />
-                          {formatDate(article.updatedAt)}
+                          {formatDate(article.date)}
                         </div>
                       {/if}
                     </div>
@@ -95,9 +95,9 @@
                           {article.title}
                         </h3>
 
-                        {#if article.subtitle}
+                        {#if article.description}
                           <p class="text-[rgba(255,255,255,0.7)] text-sm leading-relaxed">
-                            {article.subtitle}
+                            {article.description}
                           </p>
                         {/if}
                       </div>

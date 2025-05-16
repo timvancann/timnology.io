@@ -18,9 +18,7 @@ export interface ArticleMetadata {
 export interface Chapter {
   slug: string;
   title: string;
-  content: string;
   order: number;
-  youtube_url?: string;
 }
 
 export interface Article extends ArticleMetadata {
