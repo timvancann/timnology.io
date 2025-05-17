@@ -4,7 +4,7 @@ import { json } from '@sveltejs/kit';
 async function getPosts() {
   let posts: Article[] = [];
 
-  const paths = import.meta.glob('/src/articles/**/index.md', { eager: true });
+  const paths = import.meta.glob('/articles/**/index.md', { eager: true });
 
   for (const path in paths) {
     const file = paths[path];

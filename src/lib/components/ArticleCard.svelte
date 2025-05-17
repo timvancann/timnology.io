@@ -68,12 +68,9 @@
     {#if article.categories && article.categories.length > 0}
       <div class="flex flex-wrap gap-2 mb-6">
         {#each article.categories as category, i (i)}
-          <a
-            href={`/categories/${category}`}
-            class="px-3 py-1.5 rounded-full bg-[#131836] text-xs font-medium text-slate-300 border border-white/10 hover:bg-[#00BBBB]/10 hover:text-[#00BBBB] hover:border-[#00BBBB]/30 transition-colors duration-300"
-          >
-            #{category}
-          </a>
+          <!-- <a href={`/categories/${category}`} class="px-3 py-1.5 rounded-full bg-[#131836] text-xs font-medium text-slate-300 border border-white/10 hover:bg-[#00BBBB]/10 hover:text-[#00BBBB] hover:border-[#00BBBB]/30 transition-colors duration-300" > -->
+          #{category}
+          <!-- </a> -->
         {/each}
       </div>
     {/if}

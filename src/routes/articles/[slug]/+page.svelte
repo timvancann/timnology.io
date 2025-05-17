@@ -49,7 +49,7 @@
         <a href="/" class="text-slate-400 hover:text-white transition-colors">Home</a>
         <span class="mx-2 text-slate-600">/</span>
         {#if meta.categories && meta.categories[0]}
-          <a href={`/categories/${meta.categories[0]}`} class="text-slate-400 hover:text-white transition-colors">{meta.categories[0]}</a>
+          <!-- <a href={`/categories/${meta.categories[0]}`} class="text-slate-400 hover:text-white transition-colors">{meta.categories[0]}</a> -->
           <span class="mx-2 text-slate-600">/</span>
         {/if}
         <span class="text-[#00BBBB]">{meta.title}</span>

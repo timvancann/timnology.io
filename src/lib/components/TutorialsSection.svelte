@@ -12,7 +12,7 @@
   let { categorisedArticles }: Props = $props();
 </script>
 
-<div class="min-h-screen relative overflow-hidden text-white p-8">
+<div id="tutorials" class="min-h-screen relative overflow-hidden text-white p-8">
   <div class="max-w-7xl mx-auto relative z-10">
     <!-- Section header -->
     <div class="mb-10 text-center relative" in:fade={{ duration: 1000, delay: 300 }}>

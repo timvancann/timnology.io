@@ -10,25 +10,25 @@
     {
       title: 'Content',
       items: [
-        { name: 'Tutorials', href: '/#tutorials' },
-        { name: 'Articles', href: '/articles' },
-        { name: 'Videos', href: '/videos' }
+        { name: 'Tutorials', href: '/#tutorials' }
+        //{ name: 'Articles', href: '/articles' },
+        //{ name: 'Videos', href: '/videos' }
       ]
     },
     {
       title: 'About',
       items: [
         { name: 'About Timnology', href: '/about' },
-        { name: 'The Author', href: '/about#author' },
+        //{ name: 'The Author', href: '/about#author' },
         { name: 'Contact', href: '/contact' }
       ]
     },
     {
       title: 'Resources',
       items: [
-        { name: 'GitHub', href: 'https://github.com/timnology', external: true },
-        { name: 'Privacy Policy', href: '/privacy' },
-        { name: 'Terms of Use', href: '/terms' }
+        { name: 'GitHub', href: 'https://github.com/timnology', external: true }
+        //{ name: 'Privacy Policy', href: '/privacy' },
+        //{ name: 'Terms of Use', href: '/terms' }
       ]
     }
   ];

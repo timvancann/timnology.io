@@ -16,10 +16,10 @@
       name: 'Tutorials',
       href: '/#tutorials',
       dropdown: [
-        { name: 'Data Engineering', href: '/categories/data-engineering' },
-        { name: 'Cloud Infrastructure', href: '/categories/cloud-infrastructure' },
-        { name: 'Software Development', href: '/categories/software-development' },
-        { name: 'All Tutorials', href: '/tutorials' }
+        //        { name: 'Data Engineering', href: '/categories/data-engineering' },
+        //        { name: 'Cloud Infrastructure', href: '/categories/cloud-infrastructure' },
+        //        { name: 'Software Development', href: '/categories/software-development' },
+        //        { name: 'All Tutorials', href: '/tutorials' }
       ]
     },
     { name: 'About', href: '/about' },

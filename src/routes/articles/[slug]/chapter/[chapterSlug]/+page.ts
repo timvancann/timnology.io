@@ -6,14 +6,14 @@ export async function load({ params, fetch }) {
     const { slug, chapterSlug } = params;
 
     // First, load the main article metadata (we need this for context)
-    const article = await import(`../../../../../articles/${slug}/index.md`);
+    const article = await import(`../../../../../../articles/${slug}/index.md`);
 
     const paths = import.meta.glob('/src/articles/**/*.md', { eager: true });
     let chapterPath = '';
     for (const path in paths) {
-      if (path.includes(slug) && path.includes(chapterSlug + '.md')) {
+      if (path.includes(`/${slug}/`) && path.includes(`${chapterSlug}.md`)) {
         const fileName = path.split('/').pop();
-        chapterPath = `../../../../../articles/${slug}/${fileName}`;
+        chapterPath = `../../../../../../articles/${slug}/${fileName}`;
         break;
       }
     }
@@ -39,6 +39,7 @@ export async function load({ params, fetch }) {
 
     // Find the current chapter index
     const currentChapterIndex = chapters.findIndex((c) => c.slug === chapterSlug);
+    console.log(chapter, chapters, article)
 
     return {
       content: chapter.default,
