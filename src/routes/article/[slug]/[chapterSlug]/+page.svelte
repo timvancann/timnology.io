@@ -49,7 +49,7 @@
           <!-- <a href={`/categories/${meta.categories[0]}`} class="text-slate-400 hover:text-white transition-colors">{meta.categories[0]}</a> -->
           <span class="mx-2 text-slate-600">/</span>
         {/if}
-        <a href={`/articles/${slug}`} class="text-slate-400 hover:text-white transition-colors">{meta.title}</a>
+        <a href={`/article/${slug}`} class="text-slate-400 hover:text-white transition-colors">{meta.title}</a>
         <span class="mx-2 text-slate-600">/</span>
         <span class="text-[#00BBBB]">Chapter {chapterIndex + 1}</span>
       </div>
@@ -158,8 +158,8 @@
                     <span>GitHub Repository</span>
                   </a>
                 {/if}
-                {#if meta.youtube_url || meta.youtube_url}
-                  <a href={meta.youtube_url || meta.youtube_url} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
+                {#if meta.youtube_url}
+                  <a href={`https://youtu.be/${meta.youtube_url}`} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
                     <Youtube size={14} class="mr-2" />
                     <span>Video Tutorial</span>
                   </a>
@@ -186,7 +186,7 @@
           <div class="flex justify-between mt-16 pt-8 border-t border-white/10">
             {#if chapterIndex > 0}
               <a
-                href={`/articles/${slug}/${chapters[chapterIndex - 1].slug}`}
+                href={`/article/${slug}/${chapters[chapterIndex - 1].slug}`}
                 class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2"
               >
                 <ArrowRight size={16} class="rotate-180" />

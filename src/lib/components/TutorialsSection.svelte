@@ -85,7 +85,7 @@
                       {#if article.icon}
                         <div class="mr-2 flex-shrink-0">
                           <div class="card-icon relative w-14 h-14 bg-[rgba(10,15,25,0.5)] border border-[rgba(0,187,187,0.2)] rounded-lg flex items-center justify-center transition-all duration-300">
-                            <img src={article.icon} alt="" class="max-w-[60%] max-h-[60%] object-contain" />
+                            <img src={article.icon} alt="" class="max-w-[70%] max-h-[70%] object-contain" />
                           </div>
                         </div>
                       {/if}

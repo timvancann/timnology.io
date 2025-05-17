@@ -172,11 +172,6 @@
           {#if data.metadata.youtube_url}
             <YoutubeEmbed id={data.metadata.youtube_url} />
           {/if}
-          <!-- Article content -->
-          <div class="prose prose-invert max-w-none">
-            <data.content />
-          </div>
-
           <!-- Chapter navigation buttons at bottom -->
           {#if data.chapters.length > 0}
             <div class="flex justify-center mt-8 pt-8 border-t border-white/10">

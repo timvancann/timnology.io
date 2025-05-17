@@ -1,22 +1,24 @@
-import type { ArticlePageProps, Chapter, MarkdownArticle } from '$lib/types';
+import type { ArticlePageProps, Chapter, MarkdownArticle, MarkdownChapter } from '$lib/types';
+import { allChaptersInArticle, findArticle } from '$lib/utils';
 import { error } from '@sveltejs/kit';
 
-export const load = async ({ params, fetch }): Promise<ArticlePageProps> => {
+export const load = async ({ params }): Promise<ArticlePageProps> => {
   try {
     // Load the article content
     const slug = params.slug;
-    const article: MarkdownArticle = await import(`../../../articles/${slug}/index.md`);
+    const paths = import.meta.glob('/src/articles/**/*.md', { eager: true });
+    const article = paths[findArticle(slug, paths)] as MarkdownArticle;
 
     // Fetch chapters for this article
-    let chapters: Chapter[] = [];
-    try {
-      const response = await fetch(`/api/articles/${params.slug}/chapters`);
-      if (response.ok) {
-        chapters = await response.json();
-      }
-    } catch (error) {
-      console.error('Error fetching chapters:', error);
-    }
+    const chapterPaths = allChaptersInArticle(slug, paths);
+    const chapters: Chapter[] = chapterPaths.map((path) => {
+      const chapter = paths[path] as MarkdownChapter;
+      return {
+        ...chapter.metadata,
+        content: chapter.default,
+        slug: path.split('/').at(-1)?.replace('.md', '').split('-').at(-1) || ''
+      } as Chapter;
+    });
 
     return {
       metadata: article.metadata,

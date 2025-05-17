@@ -78,7 +78,7 @@
     <!-- Action buttons -->
     <div class="flex flex-wrap gap-3 mt-8">
       <!-- Read button -->
-      <a href={`/articles/${article.slug}`} class="px-5 py-2.5 rounded-lg bg-[#00BBBB] text-white font-medium hover:bg-[#00a0a0] transition-colors duration-300 flex items-center gap-2">
+      <a href={`/article/${article.slug}`} class="px-5 py-2.5 rounded-lg bg-[#00BBBB] text-white font-medium hover:bg-[#00a0a0] transition-colors duration-300 flex items-center gap-2">
         <BookOpen size={18} />
         Read Article
       </a>

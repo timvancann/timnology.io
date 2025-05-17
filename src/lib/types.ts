@@ -5,13 +5,13 @@ export type Categories = 'sveltekit' | 'svelte';
 export interface Article {
   title: string;
   description: string;
-  slug: string;
   icon: string;
-  youtube_url: string;
-  github: string;
+  youtube_url?: string;
+  github?: string;
   date: string;
   categories: Categories[];
   published: boolean;
+  slug: string;
 }
 
 export type MarkdownArticle = {
@@ -21,10 +21,9 @@ export type MarkdownArticle = {
 
 export interface Chapter {
   title: string;
-  slug: string;
   order: number;
-  fileName: string;
   description?: string;
+  slug: string;
 }
 
 export type MarkdownChapter = {

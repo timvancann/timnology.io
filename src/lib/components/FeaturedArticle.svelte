@@ -47,7 +47,7 @@
               <div class="absolute inset-0 bg-gradient-to-br from-[#00BBBB]/30 to-[#9333ea]/30 rounded-xl blur-xl opacity-50 group-hover:opacity-80 transition-opacity duration-500"></div>
 
               {#if article.icon}
-                <img src={article.icon} alt={article.title} class="relative z-10 h-32 w-32 object-contain drop-shadow-[0_0_15px_rgba(0,187,187,0.5)]" />
+                <article.icon class="h-32 w-32 p-10" />
               {:else}
                 <!-- Default code icon if no image provided -->
                 <div class="relative z-10 h-32 w-32 flex items-center justify-center text-[#00BBBB]">
@@ -86,7 +86,7 @@
                 {article.category || 'Technology'}
               </span>
 
-              <a href={`/articles/${article.slug}`} class="group inline-flex items-center font-medium text-amber-300 transition-colors hover:text-amber-400">
+              <a href={`/article/${article.slug}`} class="group inline-flex items-center font-medium text-amber-300 transition-colors hover:text-amber-400">
                 Start Learning
                 <ArrowRight size={16} class="ml-1 transition-transform duration-300 group-hover:translate-x-1" />
               </a>
