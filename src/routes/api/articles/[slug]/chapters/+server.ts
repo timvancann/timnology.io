@@ -16,7 +16,7 @@ async function getChapters(articleSlug: string) {
     if (dirName !== articleSlug || fileName === 'index.md') continue;
 
     const file = paths[path];
-    const chapterSlug = fileName.split('_')[1].replace('.md', '');
+    const chapterSlug = fileName.split('-')[1].replace('.md', '');
 
     if (file && typeof file === 'object' && 'metadata' in file && chapterSlug) {
       const metadata = file.metadata as Omit<Chapter, 'slug'>;
