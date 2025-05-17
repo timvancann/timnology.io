@@ -3,28 +3,22 @@
   import { fade, fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
   import { Calendar, Github, Youtube, ArrowRight, Bookmark, Clock, List, BookOpen } from '@lucide/svelte';
-  import type { Chapter } from '$lib/types';
   import YoutubeEmbed from 'svelte-youtube-embed';
+  import type { ArticlePageProps } from '$lib/types';
 
   interface Props {
-    data: {
-      meta: any;
-      isIndexPage: boolean;
-      chapters: Chapter[];
-      currentChapter: Chapter | null;
-    };
+    data: ArticlePageProps;
   }
 
   let { data }: Props = $props();
-  let { meta, chapters, isIndexPage } = data;
 </script>
 
 <svelte:head>
-  <title>{meta.title} | Timnology</title>
+  <title>{data.metadata.title} | Timnology</title>
   <meta property="og:type" content="article" />
-  <meta property="og:title" content={meta.title} />
-  <meta property="og:description" content={meta.description} />
-  <meta name="description" content={meta.description} />
+  <meta property="og:title" content={data.metadata.title} />
+  <meta property="og:description" content={data.metadata.description} />
+  <meta name="description" content={data.metadata.description} />
 </svelte:head>
 
 <!-- Article Hero Section -->
@@ -48,33 +42,33 @@
       <div class="flex items-center text-sm">
         <a href="/" class="text-slate-400 hover:text-white transition-colors">Home</a>
         <span class="mx-2 text-slate-600">/</span>
-        {#if meta.categories && meta.categories[0]}
+        {#if data.metadata.categories && data.metadata.categories[0]}
           <!-- <a href={`/categories/${meta.categories[0]}`} class="text-slate-400 hover:text-white transition-colors">{meta.categories[0]}</a> -->
           <span class="mx-2 text-slate-600">/</span>
         {/if}
-        <span class="text-[#00BBBB]">{meta.title}</span>
+        <span class="text-[#00BBBB]">{data.metadata.title}</span>
       </div>
     </div>
 
     <!-- Title and metadata -->
     <div class="max-w-4xl">
       <h1 class="text-3xl md:text-5xl font-bold text-white mb-6" in:fly={{ y: 20, duration: 800, delay: 300, easing: quintOut }}>
-        {meta.title}
+        {data.metadata.title}
       </h1>
 
       <div class="flex flex-wrap gap-4 mb-4 text-sm" in:fade={{ duration: 800, delay: 500 }}>
         <!-- Date -->
-        {#if meta.date}
+        {#if data.metadata.date}
           <div class="flex items-center text-amber-300">
             <Calendar size={16} class="mr-1.5" />
-            <span>{formatDate(meta.date)}</span>
+            <span>{formatDate(data.metadata.date)}</span>
           </div>
         {/if}
 
         <!-- Categories -->
-        {#if meta.categories && meta.categories.length > 0}
+        {#if data.metadata.categories && data.metadata.categories.length > 0}
           <div class="flex flex-wrap gap-2">
-            {#each meta.categories as category, i (i)}
+            {#each data.metadata.categories as category, i (i)}
               <span class="rounded-full px-3 py-1 bg-[#00BBBB]/10 text-[#00BBBB] border border-[#00BBBB]/20">
                 #{category}
               </span>
@@ -84,17 +78,17 @@
       </div>
 
       <!-- Description -->
-      {#if meta.description}
+      {#if data.metadata.description}
         <p class="text-xl text-slate-300 mb-4 leading-relaxed" in:fly={{ y: 20, duration: 800, delay: 400, easing: quintOut }}>
-          {meta.description}
+          {data.metadata.description}
         </p>
       {/if}
 
       <!-- External resources links -->
       <div class="flex flex-wrap gap-4 my-4" in:fade={{ duration: 800, delay: 600 }}>
-        {#if meta.github}
+        {#if data.metadata.github}
           <a
-            href={meta.github}
+            href={data.metadata.github}
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0c1a28]/80 border border-white/10 text-white hover:bg-[#0c1a28] transition duration-300"
@@ -104,9 +98,9 @@
           </a>
         {/if}
 
-        {#if meta.youtube_url}
+        {#if data.metadata.youtube_url}
           <a
-            href={`https://youtu.be/${meta.youtube_url}`}
+            href={`https://youtu.be/${data.metadata.youtube_url}`}
             target="_blank"
             rel="noopener noreferrer"
             class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#0c1a28]/80 border border-white/10 text-white hover:bg-[#0c1a28] transition duration-300"
@@ -116,8 +110,8 @@
           </a>
         {/if}
 
-        {#if isIndexPage && chapters.length > 0}
-          <a href={`/articles/${meta.slug}/chapter/${chapters[0].slug}`} class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition duration-300">
+        {#if data.chapters.length > 0}
+          <a href={`/article/${data.slug}/${data.chapters[0].slug}`} class="flex items-center gap-2 px-4 py-2 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition duration-300">
             <BookOpen size={18} />
             <span>Start Learning</span>
           </a>
@@ -138,7 +132,7 @@
           <div class="p-4 border-b border-white/10 bg-gradient-to-r from-[#0c1a28] to-[#131836]">
             <div class="flex items-center">
               <List size={18} class="mr-2 text-[#00BBBB]" />
-              <h3 class="font-bold text-white">Chapters ({chapters.length})</h3>
+              <h3 class="font-bold text-white">Chapters ({data.chapters.length})</h3>
             </div>
           </div>
 
@@ -150,21 +144,21 @@
                 <span class="font-medium text-white">Resources</span>
               </div>
               <div class="space-y-2 mt-3">
-                {#if meta.github}
-                  <a href={meta.github} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-[#00BBBB] transition-colors">
+                {#if data.metadata.github}
+                  <a href={data.metadata.github} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-[#00BBBB] transition-colors">
                     <Github size={14} class="mr-2" />
                     <span>GitHub Repository</span>
                   </a>
                 {/if}
-                {#if meta.youtube_url}
-                  <a href={`https://youtu.be/${meta.youtube_url}`} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
+                {#if data.metadata.youtube_url}
+                  <a href={`https://youtu.be/${data.metadata.youtube_url}`} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
                     <Youtube size={14} class="mr-2" />
                     <span>Video Tutorial</span>
                   </a>
                 {/if}
                 <div class="flex items-center text-slate-300">
                   <Clock size={14} class="mr-2" />
-                  <span>Est. time: {isIndexPage ? `${chapters.length * 10}-${chapters.length * 15} min` : '10-15 min'} </span>
+                  <span>Est. time: 10-15 min </span>
                 </div>
               </div>
             </div>
@@ -175,8 +169,8 @@
       <!-- Main content -->
       <div class="lg:w-3/4">
         <div class="bg-[#0c1a28]/80 backdrop-blur-sm rounded-lg border border-white/10 p-6 md:p-8 shadow-lg">
-          {#if meta.youtube_url}
-            <YoutubeEmbed id={meta.youtube_url} />
+          {#if data.metadata.youtube_url}
+            <YoutubeEmbed id={data.metadata.youtube_url} />
           {/if}
           <!-- Article content -->
           <div class="prose prose-invert max-w-none">
@@ -184,9 +178,9 @@
           </div>
 
           <!-- Chapter navigation buttons at bottom -->
-          {#if isIndexPage && chapters.length > 0}
+          {#if data.chapters.length > 0}
             <div class="flex justify-center mt-8 pt-8 border-t border-white/10">
-              <a href={`/articles/${meta.slug}/chapter/${chapters[0].slug}`} class="px-6 py-3 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition-colors flex items-center gap-2">
+              <a href={`/article/${data.slug}/${data.chapters[0].slug}`} class="px-6 py-3 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition-colors flex items-center gap-2">
                 <span>Start Reading Chapter 1</span>
                 <ArrowRight size={18} />
               </a>

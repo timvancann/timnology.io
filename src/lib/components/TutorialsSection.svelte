@@ -48,7 +48,7 @@
           <!-- Article cards grid -->
           <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
             {#each articles as article (article.slug)}
-              <a href={`/articles/${article.slug}`} class="block no-underline">
+              <a href={`/article/${article.slug}`} class="block no-underline">
                 <!-- Card with hover effects using classes -->
                 <div
                   class="card-container relative bg-[rgba(10,25,41,0.7)] backdrop-blur-sm border border-[rgba(0,187,187,0.2)] rounded-lg overflow-hidden transition-all duration-300 shadow-md hover:border-[rgba(0,187,187,0.5)] hover:shadow-[0_5px_15px_rgba(0,187,187,0.15)] hover:-translate-y-1"
@@ -155,10 +155,6 @@
 
   .card-container:hover .card-title {
     color: #00bbbb;
-  }
-
-  .card-container:hover .card-arrow {
-    transform: translateX(0.25rem);
   }
 
   .card-container:hover .card-badge {

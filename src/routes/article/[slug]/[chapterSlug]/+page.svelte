@@ -4,11 +4,15 @@
   import { quintOut } from 'svelte/easing';
   import { Calendar, Github, Youtube, ArrowRight, Bookmark, Clock, List } from '@lucide/svelte';
   import ChapterList from '$lib/components/ChapterList.svelte';
+  import type { ChapterPageProps } from '$lib/types';
 
-  let { data } = $props();
-  let meta = $derived(data.meta);
+  let { data }: { data: ChapterPageProps } = $props();
+  let slug = $derived(data.slug);
+  let chapterSlug = $derived(data.chapterSlug);
+  let meta = $derived(data.articleMetadata);
   let chapters = $derived(data.chapters);
-  let currentChapter = $derived(data.currentChapter);
+  let currentChapter = $derived(data.metadata);
+  let chapterIndex = $derived(data.chapterIndex);
 </script>
 
 <!-- Using the same template as the article page with a different page title -->
@@ -45,32 +49,32 @@
           <!-- <a href={`/categories/${meta.categories[0]}`} class="text-slate-400 hover:text-white transition-colors">{meta.categories[0]}</a> -->
           <span class="mx-2 text-slate-600">/</span>
         {/if}
-        <a href={`/articles/${meta.slug}`} class="text-slate-400 hover:text-white transition-colors">{meta.title}</a>
+        <a href={`/articles/${slug}`} class="text-slate-400 hover:text-white transition-colors">{meta.title}</a>
         <span class="mx-2 text-slate-600">/</span>
-        <span class="text-[#00BBBB]">Chapter {currentChapter.index + 1}</span>
+        <span class="text-[#00BBBB]">Chapter {chapterIndex + 1}</span>
       </div>
     </div>
 
     <!-- Chapter title and metadata -->
     <div class="max-w-4xl">
       <h1 class="text-3xl md:text-5xl font-bold text-white mb-6" in:fly={{ y: 20, duration: 800, delay: 300, easing: quintOut }}>
-        <span class="text-[#00BBBB]">Chapter {currentChapter.index + 1}:</span>
+        <span class="text-[#00BBBB]">Chapter {chapterIndex + 1}:</span>
         {currentChapter.title}
       </h1>
 
       <div class="flex flex-wrap gap-4 mb-4 text-sm" in:fade={{ duration: 800, delay: 500 }}>
         <!-- Date -->
-        {#if currentChapter.date || meta.date}
+        {#if meta.date}
           <div class="flex items-center text-amber-300">
             <Calendar size={16} class="mr-1.5" />
-            <span>{formatDate(currentChapter.date || meta.date)}</span>
+            <span>{formatDate(meta.date)}</span>
           </div>
         {/if}
 
         <!-- Progress indicator -->
         <div class="flex items-center text-slate-300">
           <span class="px-3 py-1 rounded-full bg-[#00BBBB]/10 text-[#00BBBB] border border-[#00BBBB]/20">
-            {currentChapter.index + 1} of {chapters.length}
+            {chapterIndex + 1} of {chapters.length}
           </span>
         </div>
       </div>
@@ -84,7 +88,7 @@
 
       <!-- External resources links -->
       <div class="flex flex-wrap gap-4 my-4" in:fade={{ duration: 800, delay: 600 }}>
-        {#if currentChapter.youtube_url}
+        {#if meta.youtube_url}
           <a
             href={`https://youtu.be/${meta.youtube_url}`}
             target="_blank"
@@ -126,18 +130,18 @@
                 <List size={18} class="mr-2 text-[#00BBBB]" />
                 <h3 class="font-bold text-white">Chapters</h3>
               </div>
-              <span class="text-sm text-slate-400">{currentChapter.index + 1}/{chapters.length}</span>
+              <span class="text-sm text-slate-400">{chapterIndex + 1}/{chapters.length}</span>
             </div>
           </div>
 
           <!-- Progress indicator -->
           <div class="relative h-1 bg-[#131836]">
-            <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-[#00BBBB] to-[#9333ea]" style={`width: ${((currentChapter.index + 1) / chapters.length) * 100}%`}></div>
+            <div class="absolute top-0 left-0 h-full bg-gradient-to-r from-[#00BBBB] to-[#9333ea]" style={`width: ${((chapterIndex + 1) / chapters.length) * 100}%`}></div>
           </div>
 
           <!-- Chapter list -->
           <div class="p-4 max-h-[70vh] overflow-y-auto">
-            <ChapterList {chapters} articleSlug={meta.slug} activeChapter={currentChapter.slug} />
+            <ChapterList {chapters} articleSlug={slug} activeChapter={chapterSlug} />
           </div>
 
           <!-- Additional resources -->
@@ -154,8 +158,8 @@
                     <span>GitHub Repository</span>
                   </a>
                 {/if}
-                {#if currentChapter.youtube_url || meta.youtube_url}
-                  <a href={currentChapter.youtube_url || meta.youtube_url} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
+                {#if meta.youtube_url || meta.youtube_url}
+                  <a href={meta.youtube_url || meta.youtube_url} target="_blank" rel="noopener noreferrer" class="flex items-center text-slate-300 hover:text-red-400 transition-colors">
                     <Youtube size={14} class="mr-2" />
                     <span>Video Tutorial</span>
                   </a>
@@ -180,27 +184,24 @@
 
           <!-- Chapter navigation buttons at bottom -->
           <div class="flex justify-between mt-16 pt-8 border-t border-white/10">
-            {#if currentChapter.index > 0}
+            {#if chapterIndex > 0}
               <a
-                href={`/articles/${meta.slug}/chapter/${chapters[currentChapter.index - 1].slug}`}
+                href={`/articles/${slug}/${chapters[chapterIndex - 1].slug}`}
                 class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2"
               >
                 <ArrowRight size={16} class="rotate-180" />
-                <span>Previous: {chapters[currentChapter.index - 1].title}</span>
+                <span>Previous: {chapters[chapterIndex - 1].title}</span>
               </a>
             {:else}
-              <a href={`/articles/${meta.slug}`} class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2">
+              <a href={`/article/${slug}`} class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2">
                 <ArrowRight size={16} class="rotate-180" />
                 <span>Article Overview</span>
               </a>
             {/if}
 
-            {#if currentChapter.index < chapters.length - 1}
-              <a
-                href={`/articles/${meta.slug}/chapter/${chapters[currentChapter.index + 1].slug}`}
-                class="px-4 py-2 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition-colors flex items-center gap-2"
-              >
-                <span>Next: {chapters[currentChapter.index + 1].title}</span>
+            {#if chapterIndex < chapters.length - 1}
+              <a href={`/article/${slug}/${chapters[chapterIndex + 1].slug}`} class="px-4 py-2 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition-colors flex items-center gap-2">
+                <span>Next: {chapters[chapterIndex + 1].title}</span>
                 <ArrowRight size={16} />
               </a>
             {/if}

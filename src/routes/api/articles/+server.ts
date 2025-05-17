@@ -4,7 +4,7 @@ import { json } from '@sveltejs/kit';
 async function getPosts() {
   let posts: Article[] = [];
 
-  const paths = import.meta.glob('/articles/**/index.md', { eager: true });
+  const paths = import.meta.glob('/src/articles/**/index.md', { eager: true });
 
   for (const path in paths) {
     const file = paths[path];
@@ -12,7 +12,7 @@ async function getPosts() {
 
     if (file && typeof file === 'object' && 'metadata' in file && slug) {
       const metadata = file.metadata as Omit<Article, 'slug'>;
-      const post = { ...metadata, slug } satisfies Article;
+      const post = { ...metadata, slug, fileName: 'index.md' } satisfies Article;
       if (post.published) posts.push(post);
     }
   }

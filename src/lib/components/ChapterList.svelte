@@ -15,7 +15,7 @@
 <div class="space-y-2">
   <!-- Main article link -->
   <a
-    href={`/articles/${articleSlug}`}
+    href={`/article/${articleSlug}`}
     class={`block w-full text-left p-3 rounded-lg border transition-all duration-300 mb-4
     ${activeChapter === null ? 'bg-[#00BBBB]/10 border-[#00BBBB]/40' : 'border-white/10 hover:bg-white/5 hover:border-white/20'}
 `}
@@ -27,7 +27,7 @@
   <!-- Chapter links -->
   {#each chapters as chapter, i (i)}
     <a
-      href={`/articles/${articleSlug}/chapter/${chapter.slug}`}
+      href={`/articles/${articleSlug}/${chapter.slug}`}
       class={`block w-full text-left p-3 rounded-lg border transition-all duration-300 hover:-translate-y-1 group relative
       ${activeChapter === chapter.slug ? 'bg-[#00BBBB]/10 border-[#00BBBB]/40' : 'border-white/10 hover:bg-white/5 hover:border-white/20'}
       `}

@@ -130,9 +130,4 @@
       background-position: 0% 50%;
     }
   }
-
-  .featured-article-container:hover :global(.bg-gradient-to-r) {
-    background-size: 200% 200%;
-    animation: gradientShift 3s ease infinite;
-  }
 </style>

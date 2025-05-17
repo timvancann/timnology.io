@@ -5,7 +5,7 @@ async function getChapters(articleSlug: string) {
   let chapters: Chapter[] = [];
 
   // Use glob to find all markdown files in the article directory except index.md
-  const paths = import.meta.glob('/articles/**/*.md', { eager: true });
+  const paths = import.meta.glob('/src/articles/**/*.md', { eager: true });
 
   for (const path in paths) {
     // Check if this file is in the correct article directory and is not index.md
@@ -23,7 +23,8 @@ async function getChapters(articleSlug: string) {
       const chapter = {
         ...metadata,
         slug: chapterSlug,
-        order: metadata.order || 0
+        order: metadata.order || 0,
+        fileName: fileName,
       } as Chapter;
 
       chapters.push(chapter);
