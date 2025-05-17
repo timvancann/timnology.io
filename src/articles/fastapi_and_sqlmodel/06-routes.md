@@ -1,0 +1,53 @@
+---
+title: Implementing Routes
+order: 6
+---
+
+When creating a Pokemon, committing the creation refreshes the object with the PostgreSQL-generated ID.
+- Getting a Pokemon is straightforward – and we return a 404 if the ID isn't found.
+- For deletion, we can reuse the get_pokemon function and re-raise any exceptions.
+- Finally, we can query all Pokemon with our list function.
+
+--- filename: ./src/blazing/routes/pokemon.py ---
+```python
+from fastapi import APIRouter, HTTPException
+from sqlmodel import select
+
+from blazing.db import SessionType
+from blazing.models.pokemon import Pokemon
+
+
+router = APIRouter(
+    prefix="/pokemon",
+)
+
+@router.post("/")
+def add_pokemon(pokemon: Pokemon, session: SessionType) -> Pokemon:
+    session.add(pokemon)
+    session.commit()
+    session.refresh(pokemon)
+
+    return pokemon
+
+@router.get("/{pokemon_id}")
+def get_pokemon(pokemon_id: int, session: SessionType) -> Pokemon:
+    pokemon = session.get(Pokemon, pokemon_id)
+    if not pokemon:
+        raise HTTPException(status_code=404, detail="Pokemon not found")
+    return pokemon
+
+@router.delete("/{pokemon_id}")
+def delete_pokemon(pokemon_id: int, session: SessionType):
+    try:
+        pokemon = get_pokemon(pokemon_id, session)
+    except HTTPException:
+        raise
+
+    session.delete(pokemon)
+    session.commit()
+    return {"ok": True}
+
+@router.get("/")
+def list_pokemon(session: SessionType) -> list[Pokemon]:
+    return list(session.exec(select(Pokemon)).all())
+```

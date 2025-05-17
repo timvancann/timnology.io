@@ -16,7 +16,7 @@ const mdsvexOptions = {
     highlighter: async (code, lang = 'text') => {
       const highlighter = await createHighlighter({
         themes: ['poimandres', 'tokyo-night', 'night-owl'],
-        langs: ['javascript', 'typescript', 'bash', 'json', 'yaml', 'python', 'toml'],
+        langs: ['javascript', 'typescript', 'bash', 'json', 'yaml', 'python', 'toml', 'docker'],
       })
       const html = escapeSvelte(highlighter.codeToHtml(code, { lang, theme: 'night-owl' }))
       highlighter.dispose()

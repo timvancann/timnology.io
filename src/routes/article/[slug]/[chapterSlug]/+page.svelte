@@ -117,7 +117,7 @@
 </section>
 
 <!-- Main article content with chapters -->
-<section class="py-16 bg-[#050a14] relative min-h-screen">
+<section class="py-8 relative min-h-screen">
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row gap-8 relative">
       <!-- Sidebar with chapter navigation -->
@@ -140,7 +140,7 @@
           </div>
 
           <!-- Chapter list -->
-          <div class="p-4 max-h-[70vh] overflow-y-auto">
+          <div class="p-4 overflow-y-auto">
             <ChapterList {chapters} articleSlug={slug} activeChapter={chapterSlug} />
           </div>
 
