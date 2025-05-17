@@ -7,5 +7,5 @@ icon: /icons/decorators.svg
 github: https://github.com/timvancann/timnology-youtube/tree/main/videos/decorators
 categories:
   - python
-published: true
+published: false
 ---

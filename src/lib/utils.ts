@@ -41,7 +41,8 @@ export const allArticles = (paths: Record<string, unknown>): Article[] => {
         ...articlePath.metadata,
         slug: article.split('/').at(-2) || ''
       };
-    });
+    })
+    .filter((article) => article.published);
 
   if (files.length === 0) {
     console.error(`Could not find any article files`);
