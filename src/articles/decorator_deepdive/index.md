@@ -1,5 +1,5 @@
 ---
-title: Decorators
+title: Code examples
 description: A deep dive into decorators
 date: '2025-06-16'
 youtube_url: 5zzji_67y5Q

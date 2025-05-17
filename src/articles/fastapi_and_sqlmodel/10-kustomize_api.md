@@ -5,8 +5,7 @@ order: 10
 
 After setting up the Helm chart, we'll reference our four Kubernetes YAML files as resources.
 
---- filename: ./deploy/kustomization.yaml ---
-```yaml
+```yaml filename="./deploy/kustomization.yaml"
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:

@@ -8,8 +8,7 @@ When creating a Pokemon, committing the creation refreshes the object with the P
 - For deletion, we can reuse the get_pokemon function and re-raise any exceptions.
 - Finally, we can query all Pokemon with our list function.
 
---- filename: ./src/blazing/routes/pokemon.py ---
-```python
+```python filename="./src/blazing/routes/pokemon.py"
 from fastapi import APIRouter, HTTPException
 from sqlmodel import select
 

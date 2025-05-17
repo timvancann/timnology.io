@@ -5,8 +5,7 @@ order: 7
 
 Getting our app into Kubernetes requires a Docker image. Thanks to uv and FastAPI, this process is straightforward.
 
---- filename: ./Dockerfile ---
-```docker
+```docker filename="./Dockerfile"
 FROM python:3.12-alpine
 COPY --from=ghcr.io/astral-sh/uv:latest /uv /bin/uv
 

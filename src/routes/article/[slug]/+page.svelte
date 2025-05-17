@@ -250,13 +250,6 @@
     border: 1px solid rgba(255, 255, 255, 0.1);
   }
 
-  :global(.prose pre code) {
-    background-color: transparent;
-    padding: 0;
-    color: inherit;
-    font-size: 0.9em;
-  }
-
   :global(.prose ul) {
     list-style-type: disc;
     padding-left: 1.5rem;

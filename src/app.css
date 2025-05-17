@@ -24,8 +24,12 @@
     @apply rounded-full bg-slate-300 transition-colors hover:bg-slate-400 dark:bg-slate-600 dark:hover:bg-slate-500;
   }
 
-
 }
+@layer utilities {
+  div[data-remark-code-title] {
+    @apply -mb-10 pb-5 pt-1 border-t-white/10 border-t-1  border-x-white/10 border-x-1 rounded-t-lg  pl-2 bg-[#011627] font-bold text-xs font-mono text-[#02BBBB]
+  }
+      }
 
 @layer components {
   .article-prose {
@@ -54,14 +58,6 @@
 
   .article-prose code {
     @apply font-mono text-amber-300 bg-black/20 px-1.5 py-0.5 rounded text-sm;
-  }
-
-  .article-prose pre {
-    @apply bg-[#131836] p-4 rounded-lg my-6 overflow-x-auto border border-white/10;
-  }
-
-  .article-prose pre code {
-    @apply bg-transparent text-inherit p-0;
   }
 
   .article-prose ul {

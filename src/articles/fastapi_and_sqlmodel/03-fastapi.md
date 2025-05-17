@@ -7,8 +7,7 @@ To keep our code organized, we'll use FastAPI's Router instead of putting everyt
 
 Our pokemon router needs four key functions:
 
---- filename: ./src/blazing/routes/pokemon.py ---
-```python
+```python filename="./src/blazing/routes/pokemon.py"
 from fastapi import APIRoute
 
 from blazing.db import SessionType
@@ -38,8 +37,7 @@ def list_pokemon(session: SessionType) -> list[Pokemon]:
 
 In `main.py`, we'll register our router with the app.
 
---- filename: ./src/blazing/main.py ---
-```python
+```python filename="./src/blazing/main.py"
 from fastapi import FastAPI
 
 from blazing.routes import pokemon

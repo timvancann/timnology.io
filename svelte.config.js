@@ -2,12 +2,8 @@ import { mdsvex, escapeSvelte } from 'mdsvex';
 import adapter from '@sveltejs/adapter-vercel';
 import { vitePreprocess } from '@sveltejs/vite-plugin-svelte';
 import { createHighlighter } from 'shiki'
-import rehypePrettyCode from "rehype-pretty-code";
+import codeTitle from "remark-code-title";
 
-/** @type {import('rehype-pretty-code').Options} */
-const options = {
-  keepBackground: false,
-};
 
 const mdsvexOptions = {
   extensions: ['.md'],
@@ -23,7 +19,7 @@ const mdsvexOptions = {
       return `{@html \`${html}\` }`
     }
   },
-  rehypePlugins: [[rehypePrettyCode, options]],
+  remarkPlugins: [codeTitle],
 }
 
 const config = {

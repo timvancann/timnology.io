@@ -45,7 +45,14 @@
 	},
 	"dependencies": {
 		"@lucide/svelte": "^0.510.0",
+		"@rehype-pretty/transformers": "^0.13.2",
+		"rehype-code-titles": "^1.2.0",
 		"rehype-pretty-code": "^0.14.1",
-		"shiki": "^3.4.1"
+		"rehype-stringify": "^10.0.1",
+		"remark-code-title": "^0.2.5",
+		"remark-parse": "^11.0.0",
+		"remark-rehype": "^11.1.2",
+		"shiki": "^3.4.1",
+		"unified": "^11.0.5"
 	}
 }
