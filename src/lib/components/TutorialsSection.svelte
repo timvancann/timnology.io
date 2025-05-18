@@ -1,8 +1,6 @@
 <script lang="ts">
   import { fade } from 'svelte/transition';
-  import { Calendar, ArrowRight, Youtube, Github, Hash } from '@lucide/svelte';
   import type { Article } from '$lib/types';
-  import { formatDate } from '$lib/utils';
   import CategoryHeader from './CategoryHeader.svelte';
   import ArticleCard from './ArticleCard.svelte';
 

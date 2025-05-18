@@ -1,6 +1,6 @@
 import type { Component } from 'svelte';
 
-export type Categories = 'sveltekit' | 'svelte';
+export type Categories = 'python' | 'kubernetes';
 
 export interface Article {
   title: string;

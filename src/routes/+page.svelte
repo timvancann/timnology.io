@@ -46,4 +46,3 @@
 <!-- Newsletter signup -->
 <!--- <Newsletter /> -->
 <!-- Features section -->
-<Features />

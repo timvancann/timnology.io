@@ -9,6 +9,8 @@
   let menuOpen = false;
   let dropdownOpen: number | null = null;
 
+  //let { categories } = $props<{ categories: string[] }>();
+
   // Menu items
   const navItems = [
     { name: 'Home', href: '/' },
@@ -16,8 +18,8 @@
       name: 'Tutorials',
       href: '/#tutorials',
       dropdown: [
-        //        { name: 'Data Engineering', href: '/categories/data-engineering' },
-        //        { name: 'Cloud Infrastructure', href: '/categories/cloud-infrastructure' },
+        { name: 'Python', href: '/category/python' },
+        { name: 'Kubernetes', href: '/category/kubernetes' }
         //        { name: 'Software Development', href: '/categories/software-development' },
         //        { name: 'All Tutorials', href: '/tutorials' }
       ]
@@ -100,7 +102,7 @@
           {#if item.dropdown}
             <div class="relative">
               <button
-                on:click|stopPropagation={() => toggleDropdown(i)}
+                onclick={() => toggleDropdown(i)}
                 class={`dropdown-toggle flex items-center px-3 py-2 rounded-md text-sm font-medium transition-colors
                 ${isActive(item.href) ? 'text-[#00BBBB] bg-[#00BBBB]/10' : 'text-slate-300 hover:bg-white/5'}
 
@@ -119,7 +121,7 @@
                         class={`block px-4 py-2 text-sm text-slate-300 hover:bg-[#00BBBB]/10 hover:text-white transition-colors
                         ${isActive(subItem.href) ? 'bg-[#00BBBB]/10 text-white' : ''} 
                         `}
-                        on:click={handleLinkClick}
+                        onclick={handleLinkClick}
                       >
                         {subItem.name}
                       </a>
@@ -135,7 +137,7 @@
               ${isActive(item.href) ? 'text-[#00BBBB] bg-[#00BBBB]/10' : 'text-white hover:bg-white/5'}
 
               `}
-              on:click={handleLinkClick}
+              onclick={handleLinkClick}
             >
               {item.name}
             </a>
@@ -157,7 +159,7 @@
       </nav>
 
       <!-- Mobile menu button -->
-      <button class="md:hidden z-20 p-2 rounded-md text-white hover:bg-white/5 transition-colors" on:click={toggleMenu} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
+      <button class="md:hidden z-20 p-2 rounded-md text-white hover:bg-white/5 transition-colors" onclick={toggleMenu} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
         {#if menuOpen}
           <X size={24} />
         {:else}
@@ -176,7 +178,7 @@
             {#if item.dropdown}
               <div class="border-b border-white/10 pb-2">
                 <button
-                  on:click|stopPropagation={() => toggleDropdown(i)}
+                  onclick={() => toggleDropdown(i)}
                   class={`dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-md text-left text-white font-medium transition-colors
                   ${dropdownOpen === i ? 'bg-[#00BBBB]/10' : 'hover:bg-white/5'}
 
@@ -189,7 +191,7 @@
                 {#if dropdownOpen === i}
                   <div class="mt-1 pl-4 border-l border-white/10" transition:slide={{ duration: 200 }}>
                     {#each item.dropdown as subItem, j (j)}
-                      <a href={subItem.href} class="block px-4 py-2.5 text-slate-300 hover:text-white transition-colors" class:text-[#00BBBB]={isActive(subItem.href)} on:click={handleLinkClick}>
+                      <a href={subItem.href} class="block px-4 py-2.5 text-slate-300 hover:text-white transition-colors" class:text-[#00BBBB]={isActive(subItem.href)} onclick={handleLinkClick}>
                         {subItem.name}
                       </a>
                     {/each}
@@ -203,7 +205,7 @@
                 ${isActive(item.href) ? 'bg-[#00BBBB]/10 text-[#00BBBB]' : 'hover:bg-white/5'}
 
                 `}
-                on:click={handleLinkClick}
+                onclick={handleLinkClick}
               >
                 {item.name}
               </a>

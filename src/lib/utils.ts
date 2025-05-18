@@ -1,5 +1,5 @@
 import { error } from '@sveltejs/kit';
-import type { Article, MarkdownArticle } from './types';
+import type { Article, Categories, MarkdownArticle } from './types';
 
 // Format date helper
 export function formatDate(dateString: string) {
@@ -75,4 +75,38 @@ export const allChaptersInArticle = (articleSlug: string, paths: Record<string, 
   });
 
   return chapterFiles;
+};
+
+export const categorisedArticles = (articles: Article[]) => {
+  // Categorise articles by their categories
+  const allCategories = new Map<string, Article[]>();
+  articles.forEach((article) => {
+    if (article.categories) {
+      article.categories.forEach((category: Categories) => allCategories.set(category, []));
+    }
+  });
+  articles.forEach((article) => {
+    if (article.categories) {
+      article.categories.forEach((category: Categories) => {
+        if (allCategories.has(category)) {
+          allCategories.get(category)?.push(article);
+        }
+      });
+    }
+  });
+  return allCategories;
+};
+
+export const allCategories = (articles: Article[]) => {
+  const categories = new Set<Categories>();
+
+  articles.forEach((article) => {
+    if (article.categories) {
+      article.categories.forEach((category) => {
+        categories.add(category);
+      });
+    }
+  });
+
+  return Array.from(categories).sort();
 };
