@@ -11,8 +11,8 @@
       title: 'Content',
       items: [
         { name: 'Tutorials', href: '/#tutorials' },
-        { name: 'Articles', href: '/articles' },
-        { name: 'Videos', href: '/videos' }
+        { name: 'Articles', href: '/articles' }
+        // { name: 'Videos', href: '/videos' }
       ]
     },
     {
