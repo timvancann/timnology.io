@@ -13,8 +13,7 @@ uvx ruff check .
 his will report all lines that violate a rule. You can modify which rules ruff checks in the toml file.
 
 
---- filename: .github/workflows/code-quality.yml ---
-```yml
+```yml title=".github/workflows/code-quality.yml"
 name: Python Code Quality
 on: [push]
 jobs:

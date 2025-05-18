@@ -5,8 +5,7 @@ order: 8
 
 The full github actions yaml file looks like this:
 
---- filename: .github/workflows/code-quality.yml ---
-```yml
+```yml title=".github/workflows/code-quality.yml"
 name: Python Code Quality
 on: [push]
 jobs:

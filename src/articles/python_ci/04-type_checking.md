@@ -17,8 +17,7 @@ To get pyright running we can run
 uv run pyright .
 ```
 
---- filename: .github/workflows/code-quality.yml ---
-```yml
+```yml title=".github/workflows/code-quality.yml"
 name: Python Code Quality
 on: [push]
 jobs:

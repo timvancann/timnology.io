@@ -7,16 +7,14 @@ We'll use Kustomize for our Kubernetes setup – a powerful tool for declarative
 
 Our application needs four key components:
 
---- filename: ./deploy/namespace.yaml ---
-```yaml
+```yaml title="./deploy/namespace.yaml"
 apiVersion: v1
 kind: Namespace
 metadata:
   name: blazing
 ```
 
---- filename: ./deploy/secret.yaml ---
-```yaml
+```yaml title="./deploy/secret.yaml"
 apiVersion: v1
 kind: Secret
 metadata:
@@ -29,8 +27,7 @@ stringData:
   POSTGRES_DB: "blazing"
 ```
 
---- filename: ./deploy/deployment.yaml ---
-```yaml
+```yaml title="./deploy/deployment.yaml"
 apiVersion: apps/v1
 kind: Deployment
 metadata:
@@ -59,8 +56,7 @@ spec:
                 name: api-secret
 ```
 
---- filename: ./deploy/service.yaml ---
-```yaml
+```yaml title="./deploy/service.yaml"
 apiVersion: v1
 kind: Service
 metadata:

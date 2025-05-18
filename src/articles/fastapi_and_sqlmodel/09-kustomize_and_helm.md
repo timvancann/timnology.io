@@ -7,8 +7,7 @@ If you're running locally without PostgreSQL, you'll need to deploy it. (If you 
 
 Kustomize allows us to reference Helm charts, so instead of building our own PostgreSQL setup, we can use the well-maintained Bitnami chart. We'll only customize the PostgreSQL credentials through our values file.
 
---- filename: ./deploy/kustomization.yaml ---
-```yaml
+```yaml title="./deploy/kustomization.yaml"
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 metadata:
@@ -23,8 +22,7 @@ helmCharts:
     valuesFile: values.yaml
 ```
 
---- filename: ./deploy/values.yaml ---
-```yaml
+```yaml title="./deploy/values.yaml"
 auth:
   database: blazing
   password: admin

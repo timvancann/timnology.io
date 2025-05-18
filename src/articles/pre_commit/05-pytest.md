@@ -13,8 +13,7 @@ To run `pytest` we can setup a custom hook by providing the `local` repo. This a
 
 `always_run` is set to true to ensure the tests always run, even when there are no files staged
 
---- filename: .pre-commit-config.yaml ---
-```yaml
+```yaml title=".pre-commit-config.yaml"
 repos:  
   - ...
   - ...

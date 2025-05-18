@@ -14,19 +14,6 @@
 
 <div id="tutorials" class="min-h-screen relative overflow-hidden text-white p-8">
   <div class="max-w-7xl mx-auto relative z-10">
-    <!-- Section header -->
-    <div class="mb-10 text-center relative" in:fade={{ duration: 1000, delay: 300 }}>
-      <h2 class="inline-block font-bold text-5xl mb-6 relative">
-        <span class="absolute -top-3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00BBBB] to-transparent" style="width: 100%; transition: width 0.8s ease-out;"></span>
-        <span class="absolute -bottom-3 left-0 right-0 h-px bg-gradient-to-r from-transparent via-[#00BBBB] to-transparent" style="width: 100%; transition: width 0.8s ease-out;"></span>
-        <span class="text-white">Technical <span class="bg-gradient-to-r from-[#00BBBB] to-[#9333ea] bg-clip-text text-transparent">Tutorials</span></span>
-      </h2>
-
-      <p class="text-gray-400 max-w-3xl mx-auto text-lg mt-4" in:fade={{ duration: 800, delay: 800 }}>
-        Advanced learning materials designed for developers seeking to expand their technical expertise
-      </p>
-    </div>
-
     <!-- Main content -->
     <div class="">
       {#each categorisedArticles.entries() as [category, articles], i (category)}

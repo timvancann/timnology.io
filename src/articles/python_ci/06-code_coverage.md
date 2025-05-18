@@ -9,8 +9,7 @@ Additionally to just running unit tests, we can also track the code coverage. Yo
 uv add --dev pytest-cov
 ```
 
---- filename: .github/workflows/code-quality.yml ---
-```yml
+```yml title=".github/workflows/code-quality.yml"
 name: Python Code Quality
 on: [push]
 jobs:

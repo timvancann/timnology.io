@@ -5,7 +5,7 @@ order: 5
 
 Back to `db.py`, to ensure our tables exist when the app starts, we'll add a `create_db_and_tables` function. This reads all registered models (currently just `Pokemon`) and executes the necessary `create table` statements. We'll use a lifespan context manager to run this at startup, with cleanup code after the `yield` executing during graceful shutdown.
 
-```python filename="-./src/blazing/db.py"
+```python title="./src/blazing/db.py"
 ...
 
 
@@ -15,7 +15,7 @@ def create_db_and_tables():
 ...
 ```
 
-```python filename="./src/blazing/main.py"
+```python title="./src/blazing/main.py"
 from contextlib import asynccontextmanager
 from fastapi import FastAPI
 

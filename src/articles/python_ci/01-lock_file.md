@@ -13,8 +13,7 @@ uv lock —-locked
 
 This is the first job in our github actions.
 
---- filename: .github/workflows/code-quality.yml ---
-```yml filename="index.js"
+```yml title="index.js" title=".github/workflows/code-quality.yml"
 name: Python Code Quality
 on: [push]
 jobs:

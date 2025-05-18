@@ -19,8 +19,7 @@ uv run pytest
 UV is so quick that it resyncs and locks the environment on every `run` command.
 If you manually edit the `pyproject.toml` file to add the `requests` library:
 
---- filename: pyproject.toml ---
-```toml
+```toml title="pyproject.toml"
 [project]
 name = "yt-uv"
 version = "0.1.0"
@@ -44,8 +43,7 @@ dev-dependencies = [
 
 import `requests` into the test file:
 
---- filename: tests/test_main.py ---
-```python
+```python title="tests/test_main.py"
 import requests
 
 def test_main():

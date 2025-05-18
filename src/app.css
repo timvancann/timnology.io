@@ -27,7 +27,7 @@
 }
 @layer utilities {
   div[data-remark-code-title] {
-    @apply -mb-10 pb-5 pt-1 border-t-white/10 border-t-1  border-x-white/10 border-x-1 rounded-t-lg  pl-2 bg-[#011627] font-bold text-xs font-mono text-[#02BBBB]
+    @apply -mb-10 pb-5 pt-1 border-t-white/10 border-t-1  border-x-white/10 border-x-1 rounded-t-lg  pl-2 bg-[#011627] font-bold text-xs font-mono text-amber-400
   }
       }
 

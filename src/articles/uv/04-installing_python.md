@@ -15,8 +15,7 @@ Python 3.8.4
 
 Now, we like to use cutting edge technology so settings the python version is as easy as modifying the `pyproject.toml` file
 
---- filename: pyproject.toml ---
-```toml {1-3,4}
+```toml {1-3,4} title="pyproject.toml"
 [project]
 name = "yt-uv"
 version = "0.1.0"

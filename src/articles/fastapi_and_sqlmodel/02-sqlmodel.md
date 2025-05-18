@@ -5,7 +5,7 @@ order: 2
 
 In `models/pokemon.py`, we'll define our SQLModel. By setting the ID as an optional primary key, we let PostgreSQL generate a new ID when creating an entity. Using `default_factory`, the model automatically inserts the creation timestamp along with three required fields: `name`, `number`, and an enum `region`.
 
-```python filename="./src/blazing/models/pokemon.py"
+```python title="./src/blazing/models/pokemon.py"
 from __future__ import annotations
 
 from datetime import datetime, timezone
@@ -28,7 +28,7 @@ class Pokemon(SQLModel, table=True):
 
 We'll create a new `db.py` module to handle database connectivity. Here, we'll read PostgreSQL credentials from environment variables, initialise the engine, and create a function that yields a Session object.
 
-```python filename="./src/blazing/db.py"
+```python title="./src/blazing/db.py"
 from os import environ
 from sqlmodel import SQLModel, create_engine, Session
 

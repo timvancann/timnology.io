@@ -10,8 +10,7 @@ uv build
 ```
 
 
---- filename: .github/workflows/code-quality.yml ---
-```yml
+```yml title=".github/workflows/code-quality.yml"
 name: Python Code Quality
 on: [push]
 jobs:
