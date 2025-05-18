@@ -10,9 +10,9 @@
     {
       title: 'Content',
       items: [
-        { name: 'Tutorials', href: '/#tutorials' }
-        //{ name: 'Articles', href: '/articles' },
-        //{ name: 'Videos', href: '/videos' }
+        { name: 'Tutorials', href: '/#tutorials' },
+        { name: 'Articles', href: '/articles' },
+        { name: 'Videos', href: '/videos' }
       ]
     },
     {
@@ -37,8 +37,7 @@
   const socialLinks = [
     { name: 'GitHub', icon: Github, href: 'https://github.com/timnology' },
     { name: 'YouTube', icon: Youtube, href: 'https://www.youtube.com/@Timnology-r4s' },
-    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/timvancann/' },
-    { name: 'Twitter', icon: Twitter, href: 'https://twitter.com/timnology' }
+    { name: 'LinkedIn', icon: Linkedin, href: 'https://www.linkedin.com/in/timvancann/' }
   ];
 </script>
 
@@ -56,9 +55,9 @@
   </div>
 
   <!-- Main footer content -->
-  <div class="container mx-auto px-4 pt-16 pb-8 relative z-10">
+  <div class="container mx-auto px-4 pt-8 pb-8 relative z-10">
     <!-- Top section with logo and links -->
-    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-12">
+    <div class="grid grid-cols-1 md:grid-cols-4 gap-8 mb-8">
       <!-- Logo and info -->
       <div class="md:col-span-1">
         <div class="flex items-center space-x-2 mb-6">
@@ -73,7 +72,7 @@
 
         <!-- Social links -->
         <div class="flex space-x-3">
-          {#each socialLinks as link}
+          {#each socialLinks as link, i (i)}
             <a
               href={link.href}
               target="_blank"
@@ -88,11 +87,11 @@
       </div>
 
       <!-- Footer links -->
-      {#each links as section}
+      {#each links as section (section.title)}
         <div>
           <h3 class="text-lg font-medium mb-4 text-white">{section.title}</h3>
           <ul class="space-y-2">
-            {#each section.items as item}
+            {#each section.items as item (item.name)}
               <li>
                 <a
                   href={item.href}
@@ -113,7 +112,7 @@
     </div>
 
     <!-- Bottom section with copyright -->
-    <div class="pt-8 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
+    <div class="pt-4 border-t border-white/5 flex flex-col md:flex-row justify-between items-center gap-4">
       <p class="text-slate-500 text-sm">
         © {currentYear} Timnology. All rights reserved.
       </p>

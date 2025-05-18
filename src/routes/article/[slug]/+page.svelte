@@ -65,9 +65,9 @@
         {#if data.metadata.categories && data.metadata.categories.length > 0}
           <div class="flex flex-wrap gap-2">
             {#each data.metadata.categories as category, i (i)}
-              <span class="rounded-full px-3 py-1 bg-[#00BBBB]/10 text-[#00BBBB] border border-[#00BBBB]/20">
+              <a href={`/category/${category}`} class="rounded-full px-3 py-1 bg-[#00BBBB]/10 text-[#00BBBB] border border-[#00BBBB]/20">
                 #{category}
-              </span>
+              </a>
             {/each}
           </div>
         {/if}
@@ -122,7 +122,7 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row gap-8 relative">
       <!-- Sidebar with chapter navigation -->
-      <div class="lg:w-1/4">
+      <div class="lg:w-1/4 hidden lg:block">
         <div class="sticky top-24 bg-[#0c1a28]/80 backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden shadow-lg">
           <!-- Chapter list header -->
           <div class="p-4 border-b border-white/10 bg-gradient-to-r from-[#0c1a28] to-[#131836]">
@@ -182,121 +182,3 @@
     </div>
   </div>
 </section>
-
-<style>
-  /* Styling for prose content */
-  :global(.prose) {
-    color: #d1d5db;
-    font-size: 1.125rem;
-    line-height: 1.75;
-  }
-
-  :global(.prose h2) {
-    color: white;
-    font-size: 1.875rem;
-    margin-top: 2.5rem;
-    margin-bottom: 1rem;
-    font-weight: 700;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    padding-bottom: 0.5rem;
-  }
-
-  :global(.prose h3) {
-    color: white;
-    font-size: 1.5rem;
-    margin-top: 2rem;
-    margin-bottom: 0.75rem;
-    font-weight: 600;
-  }
-
-  :global(.prose p) {
-    margin-top: 1.25em;
-    margin-bottom: 1.25em;
-  }
-
-  :global(.prose a) {
-    color: #00bbbb;
-    text-decoration: none;
-    font-weight: 500;
-  }
-
-  :global(.prose a:hover) {
-    text-decoration: underline;
-  }
-
-  :global(.prose strong) {
-    color: white;
-    font-weight: 600;
-  }
-
-  :global(.prose code) {
-    color: #f59e0b;
-    font-family: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, monospace;
-    font-size: 0.875em;
-    background-color: rgba(0, 0, 0, 0.2);
-    padding: 0.2em 0.4em;
-    border-radius: 0.25rem;
-  }
-
-  :global(.prose pre) {
-    background-color: #131836;
-    border-radius: 0.5rem;
-    padding: 1rem;
-    overflow-x: auto;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  :global(.prose ul) {
-    list-style-type: disc;
-    padding-left: 1.5rem;
-  }
-
-  :global(.prose ol) {
-    list-style-type: decimal;
-    padding-left: 1.5rem;
-  }
-
-  :global(.prose li) {
-    margin-top: 0.5em;
-    margin-bottom: 0.5em;
-  }
-
-  :global(.prose blockquote) {
-    border-left: 4px solid #00bbbb;
-    padding-left: 1rem;
-    font-style: italic;
-    color: #9ca3af;
-  }
-
-  :global(.prose img) {
-    border-radius: 0.5rem;
-    max-width: 100%;
-    height: auto;
-    margin: 2rem 0;
-    border: 1px solid rgba(255, 255, 255, 0.1);
-  }
-
-  :global(.prose table) {
-    width: 100%;
-    border-collapse: collapse;
-    margin: 2rem 0;
-  }
-
-  :global(.prose th) {
-    background-color: rgba(12, 26, 40, 0.8);
-    color: white;
-    font-weight: 600;
-    text-align: left;
-    padding: 0.75rem 1rem;
-    border-bottom: 2px solid rgba(255, 255, 255, 0.1);
-  }
-
-  :global(.prose td) {
-    padding: 0.75rem 1rem;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.05);
-  }
-
-  :global(.prose tr:hover) {
-    background-color: rgba(0, 187, 187, 0.05);
-  }
-</style>

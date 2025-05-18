@@ -12,7 +12,7 @@
   }>();
 </script>
 
-<div class="space-y-2 hidden md:block">
+<div class="space-y-2">
   <!-- Main article link -->
   <a
     href={`/article/${articleSlug}`}

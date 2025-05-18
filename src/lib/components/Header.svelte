@@ -93,7 +93,7 @@
           <span class="relative z-10">T</span>
           <div class="absolute inset-0 bg-black/20 rounded-lg"></div>
         </div>
-        <span class="text-lg md:text-xl font-bold text-white">Timnology</span>
+        <span class="text-lg md:text-xl font-bold text-white hidden md:block">Timnology</span>
       </a>
 
       <!-- Desktop Navigation -->
@@ -159,75 +159,32 @@
       </nav>
 
       <!-- Mobile menu button -->
-      <button class="md:hidden z-20 p-2 rounded-md text-white hover:bg-white/5 transition-colors" onclick={toggleMenu} aria-label={menuOpen ? 'Close menu' : 'Open menu'}>
-        {#if menuOpen}
-          <X size={24} />
-        {:else}
-          <Menu size={24} />
-        {/if}
-      </button>
-    </div>
-  </div>
+      <nav class="flex md:hidden items-center space-x-1">
+        <a
+          href="/articles"
+          class={`px-3 py-2 rounded-md text-sm font-medium transition-colors
+              ${isActive('/articles') ? 'text-[#00BBBB] bg-[#00BBBB]/10' : 'text-white hover:bg-white/5'}
 
-  <!-- Mobile menu -->
-  {#if menuOpen}
-    <div class="fixed inset-0 z-10 bg-[#0a0118]/95 backdrop-blur-md md:hidden overflow-y-auto" transition:fade={{ duration: 200 }}>
-      <div class="pt-20 pb-6 px-4">
-        <nav class="flex flex-col space-y-2">
-          {#each navItems as item, i (i)}
-            {#if item.dropdown}
-              <div class="border-b border-white/10 pb-2">
-                <button
-                  onclick={() => toggleDropdown(i)}
-                  class={`dropdown-toggle w-full flex items-center justify-between px-4 py-3 rounded-md text-left text-white font-medium transition-colors
-                  ${dropdownOpen === i ? 'bg-[#00BBBB]/10' : 'hover:bg-white/5'}
+              `}
+        >
+          Articles
+        </a>
 
-                  `}
-                >
-                  {item.name}
-                  <ChevronDown size={20} class={`transition-transform duration-200 ${dropdownOpen === i ? 'rotate-180' : ''}`} />
-                </button>
-
-                {#if dropdownOpen === i}
-                  <div class="mt-1 pl-4 border-l border-white/10" transition:slide={{ duration: 200 }}>
-                    {#each item.dropdown as subItem, j (j)}
-                      <a href={subItem.href} class="block px-4 py-2.5 text-slate-300 hover:text-white transition-colors" class:text-[#00BBBB]={isActive(subItem.href)} onclick={handleLinkClick}>
-                        {subItem.name}
-                      </a>
-                    {/each}
-                  </div>
-                {/if}
-              </div>
-            {:else}
-              <a
-                href={item.href}
-                class={`block px-4 py-3 rounded-md text-white font-medium transition-colors border-b border-white/10
-                ${isActive(item.href) ? 'bg-[#00BBBB]/10 text-[#00BBBB]' : 'hover:bg-white/5'}
-
-                `}
-                onclick={handleLinkClick}
-              >
-                {item.name}
-              </a>
-            {/if}
-          {/each}
-        </nav>
-
-        <!-- Social links for mobile -->
-        <div class="mt-8 flex justify-center space-x-6">
-          <a href="https://github.com/timnology" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-300 hover:text-white transition-colors" aria-label="GitHub">
-            <Github size={24} />
+        <!-- Social links -->
+        <div class="ml-4 flex items-center space-x-2">
+          <a href="https://github.com/timnology" target="_blank" rel="noopener noreferrer" class="p-1.5 text-slate-300 hover:text-white transition-colors" aria-label="GitHub">
+            <Github size={18} />
           </a>
-          <a href="https://www.youtube.com/@Timnology-r4s" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-300 hover:text-white transition-colors" aria-label="YouTube">
-            <Youtube size={24} />
+          <a href="https://www.youtube.com/@Timnology-r4s" target="_blank" rel="noopener noreferrer" class="p-1.5 text-slate-300 hover:text-white transition-colors" aria-label="YouTube">
+            <Youtube size={18} />
           </a>
-          <a href="https://www.linkedin.com/in/timvancann/" target="_blank" rel="noopener noreferrer" class="p-2 text-slate-300 hover:text-white transition-colors" aria-label="LinkedIn">
-            <Linkedin size={24} />
+          <a href="https://www.linkedin.com/in/timvancann/" target="_blank" rel="noopener noreferrer" class="p-1.5 text-slate-300 hover:text-white transition-colors" aria-label="LinkedIn">
+            <Linkedin size={18} />
           </a>
         </div>
-      </div>
+      </nav>
     </div>
-  {/if}
+  </div>
 </header>
 
 <!-- Spacer to prevent content from being hidden under the fixed header -->
