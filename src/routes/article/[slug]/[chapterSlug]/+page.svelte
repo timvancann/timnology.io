@@ -126,7 +126,7 @@
       <div class="lg:w-3/4">
         <div class="bg-[#0c1a28]/80 backdrop-blur-sm rounded-lg border border-white/10 p-6 md:p-8 shadow-lg">
           <!-- Article content -->
-          <div class="prose prose-invert max-w-none">
+          <div class="prose max-w-none">
             <data.content />
           </div>
 

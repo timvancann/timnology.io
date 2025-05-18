@@ -33,9 +33,9 @@
     <!-- Bottom glow effect on hover -->
     <div class="card-bottom-glow absolute -bottom-[5px] left-[5%] right-[5%] h-[10px] rounded-[50%] bg-[#00BBBB] blur-[10px] opacity-0 transition-opacity duration-300 -z-[1]"></div>
 
-    <div class="relative p-2 pl-[calc(1.5rem+4px)]">
+    <div class="relative p-3 pl-[calc(1.5rem+4px)]">
       <!-- Header with ID and date -->
-      <div class="flex justify-between items-center mb-5">
+      <div class="flex justify-between items-center mb-3">
         <!-- Article ID -->
         <div class="px-2 py-1 bg-[rgba(0,187,187,0.1)] border border-[rgba(0,187,187,0.2)] rounded">
           <span class="text-xs font-mono text-[rgba(0,187,187,0.8)] flex items-center">
