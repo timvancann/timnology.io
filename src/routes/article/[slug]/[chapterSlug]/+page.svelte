@@ -121,7 +121,7 @@
   <div class="container mx-auto px-4">
     <div class="flex flex-col lg:flex-row gap-8 relative">
       <!-- Sidebar with chapter navigation -->
-      <div class="lg:w-1/4">
+      <div class="lg:w-1/4 hidden md:block">
         <div class="sticky top-24 bg-[#0c1a28]/80 backdrop-blur-sm rounded-lg border border-white/10 overflow-hidden shadow-lg">
           <!-- Chapter list header -->
           <div class="p-4 border-b border-white/10 bg-gradient-to-r from-[#0c1a28] to-[#131836]">
@@ -183,14 +183,14 @@
           </div>
 
           <!-- Chapter navigation buttons at bottom -->
-          <div class="flex justify-between mt-16 pt-8 border-t border-white/10">
+          <div class="flex justify-between mt-8 pt-4 border-t border-white/10 text-sm">
             {#if chapterIndex > 0}
               <a
                 href={`/article/${slug}/${chapters[chapterIndex - 1].slug}`}
                 class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2"
               >
                 <ArrowRight size={16} class="rotate-180" />
-                <span>Previous: {chapters[chapterIndex - 1].title}</span>
+                <span>Previous</span>
               </a>
             {:else}
               <a href={`/article/${slug}`} class="px-4 py-2 rounded-lg bg-[#0c1a28] border border-white/10 text-slate-300 hover:bg-[#131836] transition-colors flex items-center gap-2">
@@ -201,7 +201,7 @@
 
             {#if chapterIndex < chapters.length - 1}
               <a href={`/article/${slug}/${chapters[chapterIndex + 1].slug}`} class="px-4 py-2 rounded-lg bg-[#00BBBB] text-white hover:bg-[#00a0a0] transition-colors flex items-center gap-2">
-                <span>Next: {chapters[chapterIndex + 1].title}</span>
+                <span>Next</span>
                 <ArrowRight size={16} />
               </a>
             {/if}
@@ -216,7 +216,6 @@
   /* Styling for prose content - same as the article page */
   :global(.prose) {
     color: #d1d5db;
-    font-size: 1.125rem;
     line-height: 1.75;
   }
 

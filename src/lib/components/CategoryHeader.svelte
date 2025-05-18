@@ -1,19 +1,52 @@
 <script lang="ts">
   import { quintOut } from 'svelte/easing';
   import { fly } from 'svelte/transition';
+  import { Terminal, FolderCode, Hash } from '@lucide/svelte';
 
-  let { category, i } = $props();
+  export let category: string;
+  export let count: number;
+  export let i = 0; // For animation sequencing
 </script>
 
-<div class="mb-10 relative" in:fly={{ y: 20, duration: 800, delay: 200 * i, easing: quintOut }}>
-  <div class="flex items-center">
-    <div class="w-1 h-10 bg-gradient-to-b from-[#00BBBB] to-[#9333ea] transition-all duration-300"></div>
-    <div class="ml-4 flex-grow">
-      <h2 class="text-2xl font-bold text-white">
-        <span class="text-[#00BBBB]">/</span>
-        {category.name}
-      </h2>
-      <div class="mt-2 h-px w-full bg-gradient-to-r from-[#00BBBB] via-[rgba(0,187,187,0.5)] to-transparent"></div>
+<div class=" relative" in:fly={{ y: 20, duration: 800, delay: 200 * i, easing: quintOut }}>
+  <!-- Combination 3: Amber accent variation -->
+  <div class="relative">
+    <!-- Background with left accent -->
+    <div class="absolute -left-3 top-0 bottom-0 w-4 bg-[#131836]/20 border-l-2 border-l-amber-500"></div>
+
+    <!-- Main container -->
+    <div class="ml-3 pl-4 pr-2 py-3 bg-[#131836]/20 backdrop-blur-sm border-t border-r border-b border-amber-500/30 rounded-r-md">
+      <div class="flex items-center justify-between">
+        <!-- Left side with terminal styling -->
+        <div class="flex items-center space-x-2">
+          <!-- Terminal icon -->
+          <Terminal size={20} class="text-amber-400" />
+
+          <div>
+            <!-- Terminal command with amber primary -->
+            <div class="flex items-center text-xl font-mono">
+              <span class="text-amber-400 mr-2">$</span>
+              <span class="text-[#00BBBB] mr-1">ls</span>
+              <span class="text-white tracking-wide">{category}</span>
+            </div>
+          </div>
+        </div>
+
+        <!-- Article counter pill with amber -->
+        <div class="px-3 py-1 bg-amber-500/10 border border-amber-500/20 rounded-md">
+          <span class="text-xs font-mono text-amber-400">
+            {count}
+            {count === 1 ? 'article' : 'articles'}
+          </span>
+        </div>
+      </div>
     </div>
+
+    <!-- Amber line -->
+    <div class="relative mt-1 h-[2px] bg-gradient-to-r from-amber-500 ml-3"></div>
   </div>
 </div>
+
+<style>
+  /* Any additional styles can go here */
+</style>

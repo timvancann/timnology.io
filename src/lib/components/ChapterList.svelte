@@ -12,7 +12,7 @@
   }>();
 </script>
 
-<div class="space-y-2">
+<div class="space-y-2 hidden md:block">
   <!-- Main article link -->
   <a
     href={`/article/${articleSlug}`}
@@ -28,7 +28,7 @@
   {#each chapters as chapter, i (i)}
     <a
       href={`/article/${articleSlug}/${chapter.slug}`}
-      class={`block w-full text-left p-2 rounded-lg border transition-all duration-300 hover:-translate-y-1 group relative
+      class={`block w-full text-left p-2 rounded-lg border transition-all duration-300 hover:-translate-y-1 group relative text-sm
       ${activeChapter === chapter.slug ? 'bg-[#00BBBB]/10 border-[#00BBBB]/40' : 'border-white/10 hover:bg-white/5 hover:border-white/20'}
       `}
       in:fly={{ y: 20, duration: 500, delay: 150 + i * 50, easing: quintOut }}
