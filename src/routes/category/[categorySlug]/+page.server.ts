@@ -6,5 +6,8 @@ export const load = async ({ params }) => {
   const paths = import.meta.glob('/src/articles/**/*.md', { eager: true });
   const articles: Article[] = allArticles(paths);
 
-  return { articles: articles.filter((article) => article.categories.includes(categorySlug)) };
+  return {
+    slug: categorySlug,
+    articles: articles.filter((article) => article.categories.includes(categorySlug))
+  };
 };
