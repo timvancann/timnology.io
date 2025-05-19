@@ -1,8 +1,8 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
-  import { fade, slide } from 'svelte/transition';
-  import { Menu, X, ChevronDown, Github, Youtube, Linkedin } from '@lucide/svelte';
+  import { slide } from 'svelte/transition';
+  import { ChevronDown, Github, Youtube, Linkedin } from '@lucide/svelte';
 
   // Navigation state
   let isScrolled = false;
@@ -89,10 +89,7 @@
     <div class="flex items-center justify-between h-16 md:h-20">
       <!-- Logo -->
       <a href="/" class="flex items-center space-x-2 z-20">
-        <div class="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-br from-[#00BBBB] to-[#9333ea] rounded-lg flex items-center justify-center text-white font-bold text-base md:text-lg relative">
-          <span class="relative z-10">T</span>
-          <div class="absolute inset-0 bg-black/20 rounded-lg"></div>
-        </div>
+        <img src="/timnology.png" alt="Timnology Logo" class="w-10 h-10" />
         <span class="text-lg md:text-xl font-bold text-white hidden md:block">Timnology</span>
       </a>
 

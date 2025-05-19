@@ -1,13 +1,13 @@
 <script lang="ts">
   import { fly } from 'svelte/transition';
   import { quintOut } from 'svelte/easing';
-  import { Mail, MessageSquare, Send, Github, Youtube, Linkedin } from '@lucide/svelte';
+  import { MessageSquare, Send, Github, Youtube, Linkedin } from '@lucide/svelte';
   import SectionHeader from '$lib/components/SectionHeader.svelte';
 
   // Social media links with icons and URLs
   const socialLinks = [
-    { name: 'GitHub', icon: Github, url: 'https://github.com/timnology', color: '#00BBBB' },
-    { name: 'YouTube', icon: Youtube, url: 'https://www.youtube.com/@Timnology-r4s', color: '#f87171' },
+    { name: 'GitHub', icon: Github, url: 'https://github.com/timvancann', color: '#00BBBB' },
+    { name: 'YouTube', icon: Youtube, url: 'https://discord.gg/mB6d74banz', color: '#f87171' },
     { name: 'LinkedIn', icon: Linkedin, url: 'https://www.linkedin.com/in/timvancann/', color: '#9333ea' }
   ];
 </script>
@@ -20,15 +20,6 @@
       <div class="md:w-3/5 mb-12 md:mb-0 md:pr-12">
         <div class="space-y-6" in:fly={{ y: 20, duration: 800, delay: 200, easing: quintOut }}>
           <!-- Email -->
-          <div class="flex items-center">
-            <div class="w-12 h-12 rounded-full flex items-center justify-center bg-[#00BBBB]/10 border border-[#00BBBB]/20 mr-4">
-              <Mail size={20} class="text-[#00BBBB]" />
-            </div>
-            <div>
-              <p class="text-white text-sm font-medium mb-1">Email Us</p>
-              <a href="mailto:contact@timnology.io" class="text-[#00BBBB] hover:text-[#00BBBB]/80 transition-colors">contact@timnology.io</a>
-            </div>
-          </div>
 
           <!-- Message -->
           <div class="flex items-center">

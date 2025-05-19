@@ -82,34 +82,6 @@
 
               <!-- Overlay gradient -->
               <div class="absolute inset-0 bg-gradient-to-tr from-[#0a0118]/80 via-transparent to-transparent"></div>
-
-              <!-- Social links -->
-              <div class="absolute bottom-6 left-0 right-0 flex justify-center space-x-4">
-                <a
-                  href="https://github.com/timnology"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                >
-                  <Github size={16} />
-                </a>
-                <a
-                  href="https://www.youtube.com/@Timnology-r4s"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                >
-                  <Youtube size={16} />
-                </a>
-                <a
-                  href="https://www.linkedin.com/in/timvancann/"
-                  target="_blank"
-                  rel="noopener noreferrer"
-                  class="w-8 h-8 flex items-center justify-center rounded-full bg-white/10 hover:bg-white/20 text-white transition-colors"
-                >
-                  <Linkedin size={16} />
-                </a>
-              </div>
             </div>
           </div>
 
