@@ -42,6 +42,7 @@ export const allArticles = (paths: Record<string, unknown>): Article[] => {
         slug: article.split('/').at(-2) || ''
       };
     })
+    .sort((a, b) => new Date(b.date).getTime() - new Date(a.date).getTime())
     .filter((article) => article.published);
 
   if (files.length === 0) {

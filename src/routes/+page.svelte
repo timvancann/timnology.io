@@ -4,8 +4,6 @@
   import Hero from '$lib/components/Hero.svelte';
   import FeaturedArticle from '$lib/components/FeaturedArticle.svelte';
   import TutorialsSection from '$lib/components/TutorialsSection.svelte';
-  import Features from '$lib/components/Features.svelte';
-  import Newsletter from '$lib/components/Newsletter.svelte';
   import type { Article } from '$lib/types';
   interface Data {
     data: {
