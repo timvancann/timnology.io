@@ -8,7 +8,7 @@ Python's functools module provides wraps to solve this.
 
 ```python
 import time
-import functools # Import functools
+import functools 
 
 def time_it_with_metadata(*, use_nanos: bool = False):
   def actual_decorator(func):
@@ -20,7 +20,6 @@ def time_it_with_metadata(*, use_nanos: bool = False):
       duration = end - start
       unit = 'nanoseconds' if use_nanos else 'seconds'
       print(f"Function '{func.__name__}' took: {duration:.4f} {unit}")
-      # debugpy.debug_this(f"Duration: {duration:.4f} {unit}")
       return result
     return wrapper
   return actual_decorator
@@ -39,6 +38,5 @@ print(f"Docstring: {documented_database_operation.__doc__}")
 # Try help(documented_database_operation) as well
 # print(help(documented_database_operation))
 ```
-
 
 By adding `@functools.wraps(func)` to our wrapper function, the metadata from the original func (like `__name__` and `__doc__`) is copied over to the wrapper function.

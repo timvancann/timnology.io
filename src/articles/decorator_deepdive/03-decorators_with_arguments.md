@@ -25,8 +25,8 @@ def time_it_configurable(*, use_nanos: bool = False): # Decorator now takes an a
   return actual_decorator # Decorator factory returns the actual decorator
 
 @time_it_configurable(use_nanos=True)
-def another_database_operation():
-  time.sleep(0.5)
+def another_database_operation(sleep_time: float = 0.5):
+  time.sleep(sleep_time)
   return "Another DB Op Complete"
 
 @time_it_configurable(use_nanos=False) # Or use default seconds
@@ -38,4 +38,6 @@ another_database_operation()
 yet_another_op()
 ```
 
-Here, `time_it_configurable` is a "decorator factory." When you call `@time_it_configurable(use_nanos=True)` it first calls `time_it_configurable(use_nanos=True)` which then returns actual_decorator. This actual_decorator is then applied to `another_database_operation`.
+Here, `time_it_configurable` is a "decorator factory." When you call `another_database_operation`
+there are three layers happening and without the `@` syntactic sugar it can be written as:
+`time_it_configurable(use_nanos=True)(another_database_operation)(sleep_time=1.0)`

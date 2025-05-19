@@ -25,19 +25,23 @@ def add(x: float | int, y: float | int) -> float | int:
 def apply(func: Callable[[float | int, float | int], float | int], x: float | int, y: float | int) -> float | int:
   return func(x, y)
 
+```
+
+Passing functions to other functions:
+```python
 # Using the apply function
 print(apply(add, 2, 3))       # Output: 5
 print(apply(multiply, 2, 3))  # Output: 6
 ```
 
-Example: Assigning Functions to Variables
+Assigning Functions to Variables:
 ```python
 op = multiply
 print(op)       # Output: <function multiply at 0x...> (address will vary)
 print(op(2, 3)) # Output: 6
 ```
 
-Example: Returning Functions from Functions
+Returning Functions from Functions:
 ```python
 
 def choose_function_to_apply(name: str) -> Callable[[float | int, float | int], float | int]:
@@ -56,4 +60,3 @@ print(result)       # Output: 14
 ```
 
 Understanding this flexibility is key to grasping how decorators work.
-

@@ -9,12 +9,9 @@ Suppose we have a function that simulates a time-consuming operation:
 ```python
 import time
 
-def database_operation_slow():
+def database_operation_slow() -> None:
   """Simulates a slow database operation."""
-  print("Starting a slow database operation...")
   time.sleep(2) # Simulate work
-  print("Finished database operation.")
-  return "Data fetched"
 ```
 
 Now, let's create a `time_it` decorator
@@ -44,7 +41,7 @@ database_operation()
 
 How it works:
 
-`time_it` is our decorator. It takes a function func as input.
+`time_it` is our decorator. It takes a function `func` as input.
 Inside `time_it`, we define another function called `wrapper`. This function will eventually replace the original database_operation.
 
 `wrapper` does three things:
@@ -52,7 +49,6 @@ Inside `time_it`, we define another function called `wrapper`. This function wil
 - Records the time before calling the original function (`func`).
 - Calls the original function (`func(*args, **kwargs)`) and stores its result. `*args` and `**kwargs` ensure our `wrapper` can handle any arguments the original function might take.
 - Records the time after, calculates the duration, prints it, and returns the result of the original function.
-`time_it` returns the wrapper function.
+- `time_it` returns the wrapper function.
 
-The `@time_it` syntax above database_operation is Python's syntactic sugar for:
-`database_operation = time_it(database_operation)`
+The `@time_it` syntax above database_operation is Python's syntactic sugar for: `time_it(database_operation)`
