@@ -1,8 +1,9 @@
 <script lang="ts">
   import { onMount } from 'svelte';
   import { page } from '$app/stores';
-  import { slide } from 'svelte/transition';
+  import { fade, fly, slide } from 'svelte/transition';
   import { ChevronDown, Github, Youtube, Linkedin } from '@lucide/svelte';
+  import { quintOut } from 'svelte/easing';
 
   // Navigation state
   let isScrolled = false;
@@ -41,12 +42,6 @@
       window.removeEventListener('scroll', handleScroll);
     };
   });
-
-  // Toggle mobile menu
-  function toggleMenu() {
-    menuOpen = !menuOpen;
-    dropdownOpen = null; // Close any open dropdowns
-  }
 
   // Toggle dropdown menu
   function toggleDropdown(index: number) {
@@ -110,17 +105,33 @@
               </button>
 
               {#if dropdownOpen === i}
-                <div class="absolute top-full right-0 mt-1 w-48 rounded-md shadow-lg bg-[#0c1a28] border border-white/10 overflow-hidden z-20" transition:slide={{ duration: 200 }}>
-                  <div class="py-1">
+                <div class="absolute top-full right-0 mt-2 w-56 rounded-xl shadow-lg overflow-hidden z-20" in:fly={{ y: -5, duration: 250, easing: quintOut }} out:fade={{ duration: 150 }}>
+                  <div class="absolute inset-0 rounded-xl p-[1px] overflow-hidden">
+                    <div class="absolute inset-0 bg-gradient-to-br from-[#00BBBB]/50 via-[#9333ea]/50 to-[#00BBBB]/50 rounded-xl"></div>
+                  </div>
+                  <div class="relative bg-[#0c1a28]/90 backdrop-blur-md rounded-xl overflow-hidden border border-white/10">
+                    <!-- Ambient glow effects -->
+                    <div class="absolute top-0 right-0 w-20 h-20 bg-[#00BBBB]/10 rounded-full blur-xl opacity-70"></div>
+                    <div class="absolute bottom-0 left-0 w-20 h-20 bg-[#9333ea]/10 rounded-full blur-xl opacity-70"></div>
+
                     {#each item.dropdown as subItem, j (j)}
                       <a
                         href={subItem.href}
-                        class={`block px-4 py-2 text-sm text-slate-300 hover:bg-[#00BBBB]/10 hover:text-white transition-colors
-                        ${isActive(subItem.href) ? 'bg-[#00BBBB]/10 text-white' : ''} 
-                        `}
+                        class="group block relative px-4 py-3 text-sm transition-colors {isActive(subItem.href) ? 'text-white bg-[#00BBBB]/10' : 'text-slate-300'}"
                         onclick={handleLinkClick}
                       >
-                        {subItem.name}
+                        <!-- Hover indicator line -->
+                        <div
+                          class="absolute left-0 top-0 bottom-0 w-1 bg-gradient-to-b from-[#00BBBB] to-[#9333ea] opacity-0 group-hover:opacity-100 transition-opacity duration-200"
+                          class:opacity-100={isActive(subItem.href)}
+                        ></div>
+
+                        <!-- Background hover effect -->
+                        <div class="absolute inset-0 bg-white/5 opacity-0 group-hover:opacity-100 transition-opacity duration-200" class:opacity-100={isActive(subItem.href)}></div>
+
+                        <span class="relative z-10 pl-2 group-hover:text-white transition-colors duration-200">
+                          {subItem.name}
+                        </span>
                       </a>
                     {/each}
                   </div>
