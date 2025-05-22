@@ -1,34 +1,24 @@
 <script lang="ts">
-  import { fade } from 'svelte/transition';
   import type { Article } from '$lib/types';
-  import CategoryHeader from './CategoryHeader.svelte';
   import ArticleCard from './ArticleCard.svelte';
 
   // Mock data for the tutorials - this would normally come from your content system
   interface Props {
-    categorisedArticles: Map<string, Article[]>;
+    articles: Article[];
   }
 
-  let { categorisedArticles }: Props = $props();
+  let { articles }: Props = $props();
 </script>
 
 <div id="tutorials" class="relative overflow-hidden text-white p-8">
   <div class="max-w-7xl mx-auto relative z-10">
     <!-- Main content -->
     <div class="">
-      {#each categorisedArticles.entries() as [category, articles], i (category)}
-        <div data-category-id={category} class="my-8">
-          <!-- Category header - from Teal/Orange -->
-          <CategoryHeader {category} count={articles.length} {i} />
-
-          <!-- Article cards grid -->
-          <div class="grid grid-cols-1 md:grid-cols-3 gap-4 mt-8">
-            {#each articles as article (article.slug)}
-              <ArticleCard {article} />
-            {/each}
-          </div>
-        </div>
-      {/each}
+      <div class="grid grid-cols-1 md:grid-cols-2 gap-10 mt-8">
+        {#each articles as article (article.slug)}
+          <ArticleCard {article} />
+        {/each}
+      </div>
     </div>
   </div>
 </div>

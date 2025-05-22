@@ -1,6 +1,6 @@
 <!-- Footer.svelte -->
 <script lang="ts">
-  import { Github, Youtube, Linkedin, Twitter, ExternalLink, Heart } from '@lucide/svelte';
+  import { Github, Youtube, Linkedin, ExternalLink, Heart } from '@lucide/svelte';
 
   // Get current year for copyright
   const currentYear = new Date().getFullYear();
@@ -61,11 +61,10 @@
       <!-- Logo and info -->
       <div class="md:col-span-1">
         <div class="flex items-center space-x-2 mb-6">
-          <div class="w-10 h-10 bg-gradient-to-br from-[#00BBBB] to-[#9333ea] rounded-lg flex items-center justify-center text-white font-bold text-lg relative">
-            <span class="relative z-10">T</span>
-            <div class="absolute inset-0 bg-black/20 rounded-lg"></div>
-          </div>
-          <span class="text-xl font-bold">Timnology</span>
+          <a href="/" class="flex items-center space-x-2 z-20">
+            <img src="/timnology.png" alt="Timnology Logo" class="w-10 h-10" />
+            <span class="text-lg md:text-xl font-bold text-white hidden md:block">Timnology</span>
+          </a> 
         </div>
 
         <p class="text-slate-400 mb-6 text-sm">Free, high-quality technical tutorials and resources for data engineers and software developers. No paywalls, no ads, just knowledge.</p>

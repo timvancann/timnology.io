@@ -39,7 +39,7 @@
 {/if}
 
 <!-- Tutorials section -->
-<TutorialsSection categorisedArticles={data.categorisedArticles} />
+<TutorialsSection articles={data.articles} />
 
 <!-- Newsletter signup -->
 <!--- <Newsletter /> -->
