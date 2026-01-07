@@ -1,8 +1,6 @@
-import type { Component } from 'svelte';
+export type Categories = "python" | "kubernetes" | "docker" | "dagster";
 
-export type Categories = 'python' | 'kubernetes';
-
-export interface Article {
+export interface ArticleMetadata {
   title: string;
   description: string;
   icon: string;
@@ -11,39 +9,24 @@ export interface Article {
   date: string;
   categories: Categories[];
   published: boolean;
-  slug: string;
 }
 
-export type MarkdownArticle = {
-  metadata: Article;
-  default: Component;
-};
+export interface Article extends ArticleMetadata {
+  slug: string;
+  readingTime?: string;
+}
 
-export interface Chapter {
+export interface ChapterMetadata {
   title: string;
   order: number;
   description?: string;
-  slug: string;
 }
 
-export type MarkdownChapter = {
-  metadata: Chapter;
-  default: Component;
-};
-
-export type ArticlePageProps = {
-  metadata: Article;
-  content: Component;
+export interface Chapter extends ChapterMetadata {
   slug: string;
-  chapters: Chapter[];
-};
+  articleSlug: string;
+}
 
-export type ChapterPageProps = {
-  content: Component;
-  metadata: Chapter;
-  articleMetadata: Article;
-  slug: string;
-  chapterSlug: string;
+export interface ArticleWithChapters extends Article {
   chapters: Chapter[];
-  chapterIndex: number;
-};
+}

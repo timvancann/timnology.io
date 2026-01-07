@@ -1,0 +1,182 @@
+@import 'tailwindcss';
+@plugin '@tailwindcss/typography';
+
+@theme {
+  /* Colors */
+  --color-background: #fafafa;
+  --color-surface: #ffffff;
+  --color-border: #e5e5e5;
+  --color-accent: #6366f1;
+
+  --color-text-primary: #171717;
+  --color-text-secondary: #737373;
+  --color-text-tertiary: #a3a3a3;
+
+  /* Font families */
+  --font-mono: ui-monospace, SFMono-Regular, Menlo, Monaco, Consolas, "Liberation Mono", "Courier New", monospace;
+
+  /* Spacing */
+  --spacing-128: 32rem;
+
+  /* Max widths */
+  --max-width-8xl: 90rem;
+
+  /* Animations */
+  --animate-fade-in: fade-in 0.3s ease-out;
+  --animate-slide-up: slide-up 0.3s ease-out;
+
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+
+  @keyframes slide-up {
+    from {
+      opacity: 0;
+      transform: translateY(10px);
+    }
+    to {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  }
+}
+
+body {
+  background-color: var(--color-background);
+  color: var(--color-text-primary);
+}
+
+/* Code block with title styling - integrated header */
+.article-prose pre.has-title {
+  @apply pt-0 relative;
+}
+
+.article-prose pre[data-title]::before {
+  content: attr(data-title);
+  @apply block px-4 py-2.5 pr-24 bg-accent/5 border-b border-border/50 font-mono text-xs font-semibold text-accent sticky top-0 z-10;
+}
+
+/* Adjust copy button position for titled code blocks */
+.code-block-wrapper:has(pre.has-title) .copy-code-button {
+  @apply top-2;
+}
+
+/* Article prose styling */
+@layer components {
+  .article-prose {
+    @apply text-text-secondary max-w-none;
+  }
+
+  .article-prose h2 {
+    @apply text-text-primary text-2xl font-bold mt-10 mb-4 pb-2 border-b border-border;
+  }
+
+  .article-prose h3 {
+    @apply text-text-primary text-xl font-bold mt-8 mb-3;
+  }
+
+  .article-prose h4 {
+    @apply text-text-primary text-lg font-semibold mt-6 mb-2;
+  }
+
+  .article-prose p {
+    @apply mb-4 leading-relaxed;
+  }
+
+  /* Inline code */
+  .article-prose code:not(pre code) {
+    @apply bg-accent/10 px-1.5 py-0.5 rounded text-accent font-mono text-sm;
+  }
+
+  /* Code blocks */
+  .article-prose pre {
+    @apply rounded-lg p-0 overflow-x-auto my-6 relative;
+  }
+
+  .article-prose pre code {
+    @apply bg-transparent p-0 text-sm block;
+    counter-reset: line;
+  }
+
+  .article-prose pre code .line {
+    @apply px-4 inline-block min-w-full;
+  }
+
+  .article-prose pre code .line::before {
+    counter-increment: line;
+    content: counter(line);
+    @apply inline-block w-8 mr-4 text-right text-text-tertiary select-none;
+  }
+
+  /* Padding for first and last lines */
+  .article-prose pre code .line:first-child {
+    @apply pt-4;
+  }
+
+  .article-prose pre code .line:last-child {
+    @apply pb-4;
+  }
+
+  /* Code block line highlighting */
+  .article-prose pre .line.highlighted {
+    @apply bg-accent/10;
+  }
+
+  .article-prose pre .line.diff.add {
+    @apply bg-green-100;
+  }
+
+  .article-prose pre .line.diff.remove {
+    @apply bg-red-100;
+  }
+
+  .article-prose a {
+    @apply text-accent hover:underline;
+  }
+
+  .article-prose ul,
+  .article-prose ol {
+    @apply mb-4 pl-6;
+  }
+
+  .article-prose ul {
+    @apply list-disc;
+  }
+
+  .article-prose ol {
+    @apply list-decimal;
+  }
+
+  .article-prose li {
+    @apply mb-2;
+  }
+
+  .article-prose blockquote {
+    @apply border-l-4 border-accent pl-4 italic text-text-tertiary my-4;
+  }
+
+  .article-prose img {
+    @apply rounded-lg my-6;
+  }
+
+  .article-prose table {
+    @apply w-full my-6 border border-border;
+  }
+
+  .article-prose th {
+    @apply bg-surface px-4 py-2 text-left font-semibold border-b border-border;
+  }
+
+  .article-prose td {
+    @apply px-4 py-2 border-b border-border;
+  }
+
+  .article-prose tr:hover {
+    @apply bg-surface;
+  }
+}
