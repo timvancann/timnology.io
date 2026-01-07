@@ -3,7 +3,7 @@
 import { useState, useMemo } from 'react';
 import ArticleCard from '@/components/articles/ArticleCard';
 import { Badge } from '@/components/ui/badge';
-import type { Article } from '@/lib/types';
+import type { Article, Categories } from '@/lib/types';
 
 type SortOption = 'date-desc' | 'date-asc' | 'title-asc' | 'title-desc';
 
@@ -13,11 +13,11 @@ interface ArticleListProps {
 
 export default function ArticleList({ articles }: ArticleListProps) {
   const [sortBy, setSortBy] = useState<SortOption>('date-desc');
-  const [selectedCategory, setSelectedCategory] = useState<string | null>(null);
+  const [selectedCategory, setSelectedCategory] = useState<Categories | null>(null);
 
   // Get unique categories
   const categories = useMemo(() => {
-    const cats = new Set<string>();
+    const cats = new Set<Categories>();
     articles.forEach(article => {
       article.categories.forEach(cat => cats.add(cat));
     });

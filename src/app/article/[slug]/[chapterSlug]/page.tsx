@@ -87,10 +87,10 @@ export default async function ChapterPage({
                                   transformerNotationDiff(),
                                   {
                                     name: 'code-title',
-                                    pre(node) {
-                                      const title = this.options.meta?.__raw?.match(/title="([^"]*)"/)?.[1];
+                                    pre(node: any) {
+                                      const title = (this as any).options.meta?.__raw?.match(/title="([^"]*)"/)?.[1];
                                       if (title) {
-                                        this.addClassToHast(node, 'has-title');
+                                        (this as any).addClassToHast(node, 'has-title');
                                         node.properties['data-title'] = title;
                                       }
                                     },
